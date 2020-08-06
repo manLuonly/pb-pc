@@ -1,0 +1,146 @@
+@import './variables.scss';
+@import './mixin.scss';
+@import './transition.scss';
+@import './element-ui.scss';
+@import './sidebar.scss';
+@import './cycleOut.scss';
+
+body {
+   height: 100%;
+   -moz-osx-font-smoothing: grayscale;
+   -webkit-font-smoothing: antialiased;
+   text-rendering: optimizeLegibility;
+   font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial, sans-serif;
+   user-select: none;
+}
+
+::-webkit-scrollbar {
+   width: 8px;
+   height: 8px;
+   background: rgba(0, 0, 0, 0.05);
+   box-shadow: inset 0 0 1px 0 rgba(0, 0, 0, 0.15);
+   padding: 0;
+   border: none;
+   overflow-x: visible;
+}
+
+::-webkit-scrollbar-thumb {
+   background: rgba(0, 0, 0, 0.25);
+   padding: 0;
+   border: none;
+   width: 20px;
+}
+
+label {
+   font-weight: 700;
+}
+
+html {
+   height: 100%;
+   box-sizing: border-box;
+}
+
+#app {
+   height: 100%;
+}
+
+*,
+*:before,
+*:after {
+   box-sizing: inherit;
+}
+
+a:focus,
+a:active {
+   outline: none;
+}
+
+a,
+a:focus,
+a:hover {
+   cursor: pointer;
+   color: inherit;
+   text-decoration: none;
+}
+
+div:focus {
+   outline: none;
+}
+
+.clearfix {
+   &:after {
+      visibility: hidden;
+      display: block;
+      font-size: 0;
+      content: " ";
+      clear: both;
+      height: 0;
+   }
+}
+
+// 隐藏滚动条
+.scrollbar_nowidth {
+   &::-webkit-scrollbar {
+      display: none; /* Chrome Safari */
+   }
+   -ms-overflow-style: none; /* IE 10+ */
+   scrollbar-width: none; /* Firefox */
+}
+
+//小手
+.cursor_pointer {
+   cursor: pointer;
+}
+
+//禁用
+.cursor_not_allowed {
+   cursor: not-allowed;
+}
+
+//pointer-events: none;
+.pointer_events_none {
+   pointer-events: none;
+}
+
+
+/*el-image 占位图样式*/
+.img_slot {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: 100%;
+   background-color: rgb(245,247,250);
+   color: #000;
+}
+
+
+/*min-width*/
+.min-width-0 {
+   min-width: 0;
+}
+
+/*图集的弹窗自定义样式 */
+.custom-atlas-dialog {
+   /*防止dialog 滚动*/
+   &.el-dialog {
+      margin: 0 auto;
+   }
+   .el-dialog__header {
+      padding: 0;
+   }
+
+   .el-dialog__body {
+      padding: 0;
+   }
+}
+
+/*用于金钱符号*/
+.first_symbol{
+   &::before {
+      content: attr(data-money);
+      font-size: 14px;
+   }
+}
+
+
+
