@@ -1,6 +1,6 @@
 <template>
-	<div class="p-20 welcome" ref="welcome">
-		欢迎进入
+	<div class="welcome" ref="welcome">
+
 	</div>
 </template>
 
@@ -8,15 +8,16 @@
 
 export default {
 	name: "Welcome",
-	data() {
-		return {
-
-		};
-	}
 };
 </script>
 
 <style lang="scss" scoped>
 .welcome {
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	overflow: hidden;
+	padding: 20px 20px 0 20px;
 }
 </style>

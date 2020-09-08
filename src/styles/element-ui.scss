@@ -1,98 +1,248 @@
 // 覆盖 element-ui 的全局样式
-
 .el-breadcrumb__inner,
 .el-breadcrumb__inner a {
-   font-weight: 400 !important;
+    font-weight: 400 !important;
 }
 
 .el-upload {
-   input[type="file"] {
-      display: none !important;
-   }
+    input[type="file"] {
+        display: none !important;
+    }
 }
 
 .el-upload__input {
-   display: none;
+    display: none;
 }
-
 
 // to fixed https://github.com/ElemeFE/element/issues/2461
 .el-dialog {
-   transform: none;
-   left: 0;
-   position: relative;
-   margin: 0 auto;
+    transform: none;
+    left: 0;
+    position: relative;
+    margin: 0 auto;
 }
 
 // 优化 element ui upload
 .upload-container {
-   .el-upload {
-      width: 100%;
+    .el-upload {
+        width: 100%;
 
-      .el-upload-dragger {
-         width: 100%;
-         height: 200px;
-      }
-   }
+        .el-upload-dragger {
+            width: 100%;
+            height: 200px;
+        }
+    }
 }
 
 // dropdown
 .el-dropdown-menu {
-   a {
-      display: block
-   }
+    a {
+        display: block;
+    }
 }
 
 // 修复 el-date-picker css style
 .el-range-separator {
-   box-sizing: content-box;
+    box-sizing: content-box;
 }
 
+
 /*element button 去除outline*/
+
 button:focus {
-   // outline: 1px dotted;
-   outline: 0px auto -webkit-focus-ring-color !important;
+    // outline: 1px dotted;
+    outline: 0px auto -webkit-focus-ring-color !important;
 }
 
 //radio大小调大
 .el-radio {
-   .el-radio__input {
-      .el-radio__inner {
-         width: 18px;
-         height: 18px;
-      }
-   }
+    .el-radio__input {
+        .el-radio__inner {
+            width: 18px;
+            height: 18px;
+        }
+    }
 }
 
+
 /*防止滚动被nav遮挡  nav的z-index为9*/
+
 .el-popover {
-   z-index: 8 !important;
+    z-index: 8 !important;
 }
 
 
 /*解决table 表头和内容边框错位问题*/
-.el-table th.gutter {
-   display: table-cell !important;
+
+.el-table {
+    padding: 5px;
+
+    th {
+        background: rgb(238, 241, 246) !important;
+
+        .gutter {
+            display: table-cell !important;
+        }
+    }
 }
 
 
 /*分页样式 居中显示*/
+
 .el-pagination {
-   display: flex;
-   align-items: center;
-   justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
+
 /*时间选择组件  解决range-separator 不对齐*/
-.el-date-editor .el-range-input, .el-date-editor .el-range-separator {
-   height: auto !important;
+
+.el-date-editor .el-range-input,
+.el-date-editor .el-range-separator {
+    height: auto !important;
+}
+
+
+/*时间选择组件  设置高度*/
+
+.el-date-editor {
+    height: 32px !important;
 }
 
 
 /*image viwer 图片预览组件 关闭按钮样式*/
 
 .el-image-viewer__close {
-   .el-icon-circle-close {
-      color: #fff;
-   }
+    .el-icon-circle-close {
+        color: #fff;
+    }
+}
+
+
+/* 计数器 宽度  */
+
+.el-input-number {
+    width: 100% !important;
+}
+
+
+/* 表格展开行 样式设置 */
+
+.table-expand {
+    font-size: 0;
+
+    label {
+        width: 90px;
+        color: #99a9bf;
+    }
+
+    .el-form-item {
+        margin-right: 0;
+        margin-bottom: 0;
+        width: 50%;
+    }
+}
+
+// input 宽度设置
+.el-input {
+    width: 100% !important;
+}
+
+
+//表格样式
+.el-table {
+    padding: 0;
+
+    th {
+        border: none !important;
+        background-color: #47A4EC !important;
+        color: #fff !important;
+
+
+        .el-form-item {
+            margin-bottom: 0;
+        }
+
+    }
+
+    //标题
+    .el-table__header-wrapper {
+        margin-bottom: 4px;
+        //增加阴影
+        box-shadow: 0 2px 10px 0 rgba(0, 0, 0, .2);
+
+        //禁止表头复选框并隐藏掉
+        .el-table__header {
+            .el-checkbox {
+                display: none !important
+            }
+
+            //表头复选框改为选择文字
+            .el-table-column--selection {
+                .cell {
+                    &::after {
+                        display: inline-block;
+                        content: "选择";
+                    }
+                }
+            }
+        }
+    }
+
+    //  排序箭头颜色
+    .ascending {
+        .ascending {
+            border-bottom-color: #fff !important;
+        }
+    }
+
+    .descending {
+        .descending {
+            border-top-color: #fff !important;
+        }
+    }
+}
+
+
+/*el-tabs*/
+.el-tabs {
+    .el-tabs__header {
+        margin-bottom: 10px;
+        padding: 0 10px;
+
+        //左右切换箭头搞大点
+        .el-icon-arrow-left {
+            font-size: 20px;
+            font-weight: bold;
+            color: #000;
+        }
+
+        .el-icon-arrow-right {
+            font-size: 20px;
+            font-weight: bold;
+            color: #000;
+        }
+
+        //增加箭头hover
+        .el-tabs__nav-next, .el-tabs__nav-prev {
+            &:hover{
+                background-color: rgba($color: #000000, $alpha: .04);
+            }
+        }
+
+        //加分界线
+        .el-tabs__item {
+            //第一个
+            &.is-top:nth-child(2) {
+                padding: 0 20px;
+            }
+            //最后一个
+            &.is-top:last-child {
+                padding: 0 20px;
+            }
+        }
+    }
+
+
 }

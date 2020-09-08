@@ -9,3 +9,6 @@ export const currentPhone = /^1(?:3[0-9]|4[5-9]|5[0-9]|6[12456]|7[0-8]|8[0-9]|9[
 //座机号码
 export const currentLandline = /^0[1-9][0-9]{1,2}-[2-8][0-9]{6,7}$/;
 
+//不允许输入空格等特殊符号
+export const specialCharacters = /^[A-Za-z0-9\u4e00-\u9fa5]+$/;
+
