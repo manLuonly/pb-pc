@@ -7,6 +7,8 @@ const productionGzip = true;
 const productionGzipExtensions = ["js", "css"];
 // 开发端口 port
 const port = process.env.port || process.env.npm_config_port || 9000;
+//代理地址
+const devServerProxyTargetUrl = "https://m.maoyan.com/ajax"
 
 module.exports = {
     /**
@@ -93,15 +95,10 @@ module.exports = {
         port: port,
         open: true,
         proxy: {
-            // "/": {
-            //     target: "http://192.168.31.170:8080",
-            //     changeOrigin: true,
-            // }
-           "/": {
-              target: "http://192.168.1.170:8080",
-              changeOrigin: true,
-           }
-
+            "/": {
+                target: devServerProxyTargetUrl,
+                changeOrigin: true
+            }
         }
     }
 };

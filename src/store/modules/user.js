@@ -7,13 +7,10 @@ import { removeStore } from "@/api/storage";
 const user = {
     namespaced: true,
     state: {
+        systemName:"element后台系统",
         userName: "",
         addRouters: [],
         routers: [],
-    },
-    getters: {
-        userName: state => state.userName,
-        routers: state => state.routers,
     },
     mutations: {
         setAddRouters(state, role) {

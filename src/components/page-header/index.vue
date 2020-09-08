@@ -1,12 +1,10 @@
 <!-- 系统顶部头部 -->
 <template>
 	<div class="page_header">
-		<div class="system_name">海鲜管理系统</div>
+		<div class="system_name">{{systemName}}</div>
 		<div class="right_menu m-right-30">
 			<div>账号:{{userName}}</div>
-			<el-divider direction="vertical"></el-divider>
-			<div>{{ userShopName ? '店铺名：' +userShopName : '超级管理员'}}</div>
-            <fullScreen class="m-left-20"/>
+			<fullScreen class="m-left-20" />
 			<el-tooltip class="m-left-20" effect="dark" content="退出登录" placement="bottom">
 				<el-button size="small" icon="el-icon-switch-button login-out" @click="logout">退出登录</el-button>
 			</el-tooltip>
@@ -19,7 +17,7 @@ import { mapGetters } from "vuex";
 export default {
 	name: "page-header",
 	computed: {
-		...mapGetters(["userName", "userShopName"]),
+		...mapGetters(["userName", "systemName"]),
 	},
 	methods: {
 		async logout() {
@@ -36,8 +34,8 @@ export default {
 	top: 0;
 	left: 0;
 	display: flex;
-   align-items: center;
-   justify-content: space-between;
+	align-items: center;
+	justify-content: space-between;
 	width: 100%;
 	height: $page-header_height;
 	background-image: linear-gradient(90deg, #2b435b 0%, #4572a4 100%);

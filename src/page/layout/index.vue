@@ -1,55 +1,41 @@
 <template>
-    <div :class="classObj" class="app-wrapper">
-        <page-header />
-        <sidebar class="sidebar-container" />
-        <div class="main-container">
-            <app-main />
-        </div>
-        <purchase-dialog v-if="isShowPurchaseDialog"></purchase-dialog>
-        <order-dialog v-if="isShowOrderDialog"></order-dialog>
-        <shops-dialog v-if="isShowShopsDialog"></shops-dialog>
-    </div>
+	<div :class="classObj" class="app-wrapper">
+		<page-header />
+		<sidebar class="sidebar-container" />
+		<div class="main-container">
+			<app-main />
+		</div>
+	</div>
 </template>
 
 <script>
-import purchaseDialog from "@/components/form/purchaseDialog";
-import orderDialog from "@/components/form/orderDialog";
-import shopsDialog from "@/components/form/shopsDialog";
 import { Navbar, Sidebar, AppMain } from "./layout";
 import { mapGetters } from "vuex";
 import pageHeader from "@/components/page-header";
 
 export default {
-    name: "Layout",
-    data() {
-        return {};
-    },
-    components: {
-        Navbar,
-        Sidebar,
-        AppMain,
-        purchaseDialog,
-        orderDialog,
-        shopsDialog,
-        pageHeader,
-    },
-    computed: {
-        sidebar() {
-            return this.$store.state.app.sidebar;
-        },
-        classObj() {
-            return {
-                hideSidebar: !this.sidebar.opened,
-                openSidebar: this.sidebar.opened,
-                withoutAnimation: this.sidebar.withoutAnimation,
-            };
-        },
-        ...mapGetters([
-            "isShowPurchaseDialog",
-            "isShowOrderDialog",
-            "isShowShopsDialog",
-        ]),
-    },
+	name: "Layout",
+	data() {
+		return {};
+	},
+	components: {
+		Navbar,
+		Sidebar,
+		AppMain,
+		pageHeader,
+	},
+	computed: {
+		sidebar() {
+			return this.$store.state.app.sidebar;
+		},
+		classObj() {
+			return {
+				hideSidebar: !this.sidebar.opened,
+				openSidebar: this.sidebar.opened,
+				withoutAnimation: this.sidebar.withoutAnimation,
+			};
+		},
+	},
 };
 </script>
 
@@ -58,8 +44,8 @@ export default {
 	@include clearfix;
 	position: relative;
 	height: 100%;
-   width: 100%;
-   overflow: hidden;
+	width: 100%;
+	overflow: hidden;
 	&.mobile.openSidebar {
 		position: fixed;
 		top: 0;

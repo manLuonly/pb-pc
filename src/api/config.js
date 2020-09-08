@@ -10,7 +10,7 @@ import { errorMsg } from "@/utils/message";
 
 //配置项
 let axios = Axios.create({
-    baseURL: process.env.NODE_ENV == "development" ? "/" : "/",
+    baseURL: process.env.NODE_ENV == "development" ? process.env.VUE_APP_BASE_API : "/",
     timeout: 10000, // 请求超时时间
     withCredentials: true,
 });

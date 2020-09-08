@@ -22,7 +22,6 @@ import "@/router/permission";
 //引入animate.css
 require("animate.css");
 
-SmoothScroll({ stepSize: 50 });
 Vue.use(ElementUI, { size: "small" });
 
 Vue.use(commonComponents);

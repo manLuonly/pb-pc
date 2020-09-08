@@ -1,9 +1,8 @@
 import axios from "./config";
 // 引入qs模块，用来序列化post类型的数据
 import QS from "qs";
-import { showMsg, errorMsg } from "@/utils/message";
+import { showMsg } from "@/utils/message";
 import { removeToken, removeName, getToken } from "@/utils/auth";
-import { removeStore } from "@/api/storage";
 
 /**
  * axios请求
@@ -13,7 +12,7 @@ import { removeStore } from "@/api/storage";
  * @param {Object}      params           请求时携带的参数
  * @param {Boolean}     isForm          是否为form表单方式
  * @param {Boolean}     isShowMsg       是否显示成功的提示
- * @param {Object}      axiosOptions     axios的配置
+ * @param {Object}      axiosOptions    自定义axios自带的配置
  *
  */
 export default ({
@@ -36,7 +35,7 @@ export default ({
         put: "data",
         delete: "params",
     };
-    const fromHeaders = {
+    const commonHeaders = {
         "Content-Type": isForm
             ? "application/x-www-form-urlencoded; charset=UTF-8"
             : "application/json;charset=UTF-8",
@@ -47,7 +46,7 @@ export default ({
             url,
             method,
             [paramsName[method]]: paramsMap[method],
-            headers: fromHeaders,
+            headers: commonHeaders,
             ...axiosOptions,
         })
             .then((res) => {
@@ -55,13 +54,13 @@ export default ({
                 const code = (res.data && res.data.code) || 0;
 
                 //状态
-                // if (code === -3) {
-                //     //token过期，请重写登陆
-                //     removeToken();
-                //     removeName("role");
-                //     window.location.reload(); //重新加载
-                //     return;
-                // }
+                if (code === -3) {
+                    //token过期，请重写登陆
+                    removeToken();
+                    removeName("role");
+                    window.location.reload(); //重新加载
+                    return;
+                }
 
                 resolve(res.data);
                 if (isShowMsg) {

@@ -29,7 +29,7 @@ export default {
 					// 	this.$router.replace({ path: "/" });
 					// } else {
 						this.$router.replace({
-							path: "/userShop/warehouseStore/supplier",
+							path: "/index",
 						});
 					// }
 				// })

@@ -10,19 +10,13 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
     modules: {
         app,
-        user
+        user,
     },
     getters,
     //数据持久化
     // 非Module格式：xxxx
     // 使用了Module的格式：ModuleName.xxxx，
-    plugins: [
-        vuexForever.persistedstate("localStorage", [
-            "user.userName",
-            "user.userShopName",
-            "user.addressIsDefalut"
-        ])
-    ]
+    plugins: [vuexForever.persistedstate("localStorage", ["user.userName"])],
 });
 
 export default store;
