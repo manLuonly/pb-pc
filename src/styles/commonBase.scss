@@ -1,0 +1,45 @@
+
+
+//自定义滚动条
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    background: rgba(0, 0, 0, 0.05);
+    box-shadow: inset 0 0 1px 0 rgba(0, 0, 0, 0.15);
+    padding: 0;
+    border: none;
+    overflow-x: visible;
+}
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.25);
+    padding: 0;
+    border: none;
+    width: 20px;
+}
+
+/*el-image 占位图样式*/
+.img_slot {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background-color: rgb(245, 247, 250);
+    color: #000;
+}
+
+
+/*min-width*/
+.min-width-0 {
+    min-width: 0;
+}
+
+
+// 隐藏滚动条
+.scrollbar_nowidth {
+    &::-webkit-scrollbar {
+        display: none;
+    }
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+

@@ -7,6 +7,8 @@ import filterContentBar from "./filter-content-bar";
 import search from "./search";
 import tip from "./tip";
 import fullScreen from "./full-screen";
+import loadingImage from "./loading-image";
+
 
 /**
  * 存放公共组件位置
@@ -25,5 +27,7 @@ export default {
         Vue.component("tip", tip);
         Vue.component("filterContentBar", filterContentBar);
         Vue.component("fullScreen", fullScreen);
+        Vue.component("loadingImage", loadingImage);
+
     }
 };
