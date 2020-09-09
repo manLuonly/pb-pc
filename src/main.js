@@ -13,7 +13,7 @@ import "@/filters";
 import './styles/element-variables.scss';
 
 //定制的CSS文件，它让不同的浏览器在渲染网页元素的时候形式更统一
-import "normalize.css/normalize.css";
+import 'normalize.css/normalize.css'
 
 import commonComponents from "@/components";
 import common from "@/common";

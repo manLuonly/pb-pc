@@ -3,6 +3,31 @@ let md5 = require("js-md5");
 import dayjs from "dayjs";
 
 export default {
+    /***
+     * lodash
+     *
+     */
+    _: _,
+
+    /**
+     * md5加密方法
+     *
+     * @param
+     *
+     * @example this.$utils.md5("lijiacheng")
+     *
+     * @return {string} 加密后的字符串
+     */
+    md5: md5,
+
+    /**
+     * dayjs
+     *
+     * @description 用于时间格式化
+     */
+    dayjs: dayjs,
+
+
     /**
      * 获取高度
      * 设置el-table 表格固定高度,
@@ -37,17 +62,16 @@ export default {
         return documentHeight - 160 - minusHeight;
     },
 
-    /***
-     * lodash
-     */
-    _: _,
+
     /**
      * 表情和中文字去除
      */
     stringRemoveSpecialSymbols(str) {
-
         // 特殊符号
-        str = str.replace(/[^\u4e00-\u9fa5a-zA-Z0-9\w\/\、\+\-\*\,\.\。\!\?\#\(\)]/g, "");
+        str = str.replace(
+            /[^\u4e00-\u9fa5a-zA-Z0-9\w\/\、\+\-\*\,\.\。\!\?\#\(\)]/g,
+            ""
+        );
 
         // 表情
         str = str.replace(
@@ -56,22 +80,6 @@ export default {
         );
         return str;
     },
-
-    /**
-     * md5加密方法
-     *
-     * @param
-     *
-     * @example this.$utils.md5("lijiacheng")
-     *
-     * @return {string} 加密后的字符串
-     */
-    md5: md5,
-
-    /**
-     * dayjs
-     */
-    dayjs: dayjs,
     /**
      *
      * 置顶当前滚动区域
@@ -81,10 +89,10 @@ export default {
      * @param  scrollTop 滚动的高度
      *
      *
-    */
+     */
     scrollToTop(el, scrollTop = 0) {
-        const cubic = value => Math.pow(value, 3);
-        const easeInOutCubic = value =>
+        const cubic = (value) => Math.pow(value, 3);
+        const easeInOutCubic = (value) =>
             value < 0.5 ? cubic(value * 2) / 2 : 1 - cubic((1 - value) * 2) / 2;
 
         el = el || document.documentElement;
@@ -92,7 +100,7 @@ export default {
         //开始位置
         const beginValue = el.scrollTop;
         const rAF =
-            window.requestAnimationFrame || (func => setTimeout(func, 16));
+            window.requestAnimationFrame || ((func) => setTimeout(func, 16));
         const frameFunc = () => {
             if (scrollTop) {
                 el.scrollTop = scrollTop;
@@ -107,5 +115,49 @@ export default {
             }
         };
         rAF(frameFunc);
-    }
+    },
+    /**
+     * 创建下载
+     *
+     * @param {*} url  地址
+     * @param {*} name 名字
+     */
+    createDownload(url, name) {
+        let a = document.createElement("a");
+        a.href = url;
+        a.download = name;
+        a.click();
+    },
+    /**
+     * 创建文件
+     *
+     * @param {*} content 创建文件的内容
+     * @param {*} filename  文件名(加后缀，不加后最默认为.txt)
+     */
+    createFile(content, filename) {
+        const eleLink = document.createElement("a");
+        eleLink.download = filename;
+        eleLink.style.display = "none";
+        const blob = new Blob([content]);
+        eleLink.href = URL.createObjectURL(blob);
+        eleLink.click();
+    },
+    /**
+     * 获取url的所有参数
+     *
+     * @param {*} url
+     */
+    getURLParameters(url) {
+        return url
+            .match(/([^?=&]+)(=([^&]*))/g)
+            .reduce(
+                (a, v) => (
+                    (a[v.slice(0, v.indexOf("="))] = v.slice(
+                        v.indexOf("=") + 1
+                    )),
+                    a
+                ),
+                {}
+            );
+    },
 };

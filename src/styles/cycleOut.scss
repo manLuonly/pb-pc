@@ -96,3 +96,12 @@
         -webkit-box-orient: vertical;
     }
 }
+
+
+
+// 定义flex等分
+@for $i from 0 through 12 {
+	.z-flex-#{$i} {
+		flex: $i;
+	}
+}
