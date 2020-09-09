@@ -242,18 +242,6 @@ export default {
 		}
 	}
 
-	.tool-link {
-		display: inline-block;
-		position: relative;
-		top: 6px;
-		left: -2px;
-		margin: 0 10px;
-		width: 1px;
-		height: 20px;
-		opacity: 0.2;
-		background: url("../../assets/img/vertical_line.png") no-repeat;
-	}
-
 	.tool-l {
 		width: 70%;
 	}
