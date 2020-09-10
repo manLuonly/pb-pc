@@ -7,12 +7,15 @@ import { removeToken, removeName, getToken } from "@/utils/auth";
 /**
  * axios请求
  *
- * @param {String}      method           请求方式
- * @param {String}      url              请求的url地址
- * @param {Object}      params           请求时携带的参数
- * @param {Boolean}     isForm          是否为form表单方式
- * @param {Boolean}     isShowMsg       是否显示成功的提示
- * @param {Object}      axiosOptions    自定义axios自带的配置
+ *
+ * @param {Object}
+ *
+ *      @param {String}      method           请求方式
+ *      @param {String}      url              请求的url地址
+ *      @param {Object}      params           请求时携带的参数
+ *      @param {Boolean}     isForm          是否为form表单方式
+ *      @param {Boolean}     isShowMsg       是否显示成功的提示
+ *      @param {Object}      axiosOptions    自定义axios自带的配置
  *
  */
 export default ({

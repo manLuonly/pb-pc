@@ -43,7 +43,7 @@ export default {
      * @example 1000.234 -> ￥1,000.23
      *
      */
-    formatMoney(money) {
+    numberToMoney(money) {
         return  numeral(money).format('$0,0.00');
     },
     /**

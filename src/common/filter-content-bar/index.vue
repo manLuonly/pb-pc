@@ -1,10 +1,10 @@
 <!-- 显示筛选条件的块 -->
 <template>
 	<div class="filter_content_bar">
-        <div v-if="$utils._.size(text)" class="text-ellipsis-1">
+        <div v-if="hasText" class="text-ellipsis-1">
             筛选内容:
             <span v-for="(value, key, i) in text" :key="i">
-                <span class="zngl-orange">{{key}}</span>:{{value}};&nbsp;
+                <span class="zngl-orange">{{key}}</span> : {{value}};&nbsp;
             </span>
         </div>
         <div v-else>
@@ -24,7 +24,14 @@ export default {
 			type: Object,
 			default:()=>({})
 		},
-	},
+    },
+    computed:{
+        hasText() {
+            const { text } = this
+
+            return this.$utils._.size(text) && this.$utils._.compact(Object.values(text)).length
+        }
+    }
 };
 </script>
 
