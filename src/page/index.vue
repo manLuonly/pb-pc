@@ -1,8 +1,6 @@
 <template>
 	<div class="index">
-		首页
-        <zDatePicker :time.sync="time" placeholder="测试" type="datetime" :isDisabledAfterToday="false"/>
-        <zDateRange :time.sync="time1" placeholder="测试" type="date" :isDisabledAfterToday="false" />
+        <el-input v-model="input" placeholder="请输入内容"></el-input>
 	</div>
 </template>
 
@@ -13,12 +11,10 @@ export default {
     name: "",
     data() {
         return {
-            time:"",
-            time1:[],
+            input:"",
         }
     },
     mounted() {
-
         demo
     },
 

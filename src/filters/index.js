@@ -1,8 +1,9 @@
 import Vue from 'vue'
-import dateFormat from './dateFormat'
+import { date, dateTime } from './dateFormat'
 
 const filters = {
-    dateFormat
+    dateFormat:date,
+    dateTimeFormat:dateTime,
 };
 
 Object.keys(filters).forEach(key => {
