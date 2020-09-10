@@ -22,9 +22,8 @@
 		:append-to-body="false"
 		:disabled-date="isDisabledAfterToday ? disabledAfterToday : notLimitDate"
 	>
-		<svg aria-hidden="true" slot="icon-calendar">
-			<use xlink:href="#iconrili" />
-		</svg>
+        <i  class="iconfont rili" slot="icon-calendar"></i>
+        <i class="iconfont guanbi" slot="icon-clear"></i>
 	</date-picker>
 </template>
 

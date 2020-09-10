@@ -26,9 +26,8 @@
 		@close="showTimeRangePanel = false"
 		:style="{width:type === 'date' ? '240px' : '360px' }"
 	>
-		<svg aria-hidden="true" slot="icon-calendar">
-			<use xlink:href="#iconrili" />
-		</svg>
+		<i  class="iconfont rili" slot="icon-calendar"></i>
+        <i class="iconfont guanbi" slot="icon-clear"></i>
 		<template v-slot:footer v-if="type === 'datetime'">
 			<button
 				class="mx-btn mx-btn-text"
