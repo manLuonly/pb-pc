@@ -15,8 +15,8 @@ router.beforeEach(async(to, from, next) => {
     NProgress.start();
 
     // //获取
-    const hasToken = getToken("token");
-    const role = getName("role");
+    const hasToken = getToken("token") || 666;
+    const role = getName("role") || "ROLE_ADMIN";
 
     if (hasToken && role) {
         if (to.path === "/login") {
@@ -28,7 +28,7 @@ router.beforeEach(async(to, from, next) => {
             if (hasRoles) {
                 next();
             } else {
-                store.commit("setAddRouters", role);
+                store.commit("user/setAddRouters", role);
                 next({...to, replace: true });
             }
         }

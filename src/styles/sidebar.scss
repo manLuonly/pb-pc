@@ -109,94 +109,10 @@
         }
     }
 
-    .hideSidebar {
-        .sidebar-container {
-            width: 54px !important;
-        }
-
-        .main-container {
-            margin-left: 54px;
-        }
-
-        .submenu-title-noDropdown {
-            padding: 0 !important;
-            position: relative;
-
-            //收起sidebar后的图标样式
-            .el-tooltip {
-                padding: 0 !important;
-                padding-left: 10px !important;
-
-                .svg-icon {
-                    margin-left: 20px;
-                }
-            }
-        }
-
-        .el-submenu {
-            overflow: hidden;
-
-            //收起sidebar后的图标样式
-            &>.el-submenu__title {
-                padding: 0 !important;
-                padding-left: 10px !important;
-
-                .svg-icon {
-                    margin-left: 20px;
-                }
-
-                .el-submenu__icon-arrow {
-                    display: none;
-                }
-            }
-        }
-
-        .el-menu--collapse {
-            .el-submenu {
-                &>.el-submenu__title {
-                    &>span {
-                        height: 0;
-                        width: 0;
-                        overflow: hidden;
-                        visibility: hidden;
-                        display: inline-block;
-                    }
-                }
-            }
-        }
-    }
-
     .el-menu--collapse .el-menu .el-submenu {
         min-width: $sideBarWidth !important;
     }
 
-    // mobile responsive
-    .mobile {
-        .main-container {
-            margin-left: 0px;
-        }
-
-        .sidebar-container {
-            transition: transform .28s;
-            width: $sideBarWidth !important;
-        }
-
-        &.hideSidebar {
-            .sidebar-container {
-                pointer-events: none;
-                transition-duration: 0.3s;
-                transform: translate3d(-$sideBarWidth, 0, 0);
-            }
-        }
-    }
-
-    .withoutAnimation {
-
-        .main-container,
-        .sidebar-container {
-            transition: none;
-        }
-    }
 }
 
 // when menu collapsed

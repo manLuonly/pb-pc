@@ -23,7 +23,7 @@
        pagination 分页
        select-page 表单项切换
        shops-tab  表格切换组件
-       sidebar 导航栏
+        导航栏
        table 表格页面
        Welcome.vue 首页
     

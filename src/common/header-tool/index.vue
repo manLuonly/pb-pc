@@ -36,7 +36,11 @@
 </template>
 
 <script>
+import search from './search'
 export default {
+    components:{
+        search
+    },
 	props: {
 		list: {
 			value: Array,

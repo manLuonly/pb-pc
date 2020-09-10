@@ -26,7 +26,7 @@ const user = {
             //保证每次vuex拿到完整的routes,在store里维护一个routes对象，然后使用这个对象遍历生成侧面导航栏
             // 之前框架是使用router.options.routes渲染，但router.options.routes不能恢复之前的状态，会导致每次登陆都会叠加
             const routers = VueRouter.options.routes.concat(state.addRouters);
-            this.commit("setRouters", routers);
+            this.commit("user/setRouters", routers);
         },
         setRouters(state, routers) {
             state.routers = routers;

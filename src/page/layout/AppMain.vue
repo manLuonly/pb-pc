@@ -32,12 +32,3 @@ export default {
 	background-color: #f8f8f8;
 }
 </style>
-
-<style lang="scss">
-// fix css style bug in open el-dialog
-.el-popup-parent--hidden {
-	.fixed-header {
-		padding-right: 15px;
-	}
-}
-</style>

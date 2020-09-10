@@ -85,7 +85,7 @@ export default {
      * 置顶当前滚动区域
      *
      *
-     * @param  el 滚动区域的dom  不传默认为body
+     * @param  el        滚动区域的dom  不传默认为body
      * @param  scrollTop 滚动的高度
      *
      *

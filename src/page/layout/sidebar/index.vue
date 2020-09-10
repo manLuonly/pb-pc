@@ -3,7 +3,7 @@
 		<el-scrollbar wrap-class="scrollbar-wrapper">
 			<el-menu
 				:default-active="activeMenu"
-				:collapse="isCollapse"
+				:collapse="false"
 				:background-color="variables.menuBg"
 				:text-color="variables.menuText"
 				:unique-opened="false"
@@ -25,7 +25,7 @@ import variables from "@/styles/variables.scss";
 export default {
 	components: { SidebarItem },
 	computed: {
-		...mapGetters(["sidebar", "routers"]),
+		...mapGetters(["routers"]),
 		activeMenu() {
 			const route = this.$route;
 			const { meta, path } = route;
@@ -36,10 +36,7 @@ export default {
 		},
 		variables() {
 			return variables;
-		},
-		isCollapse() {
-			return !this.sidebar.opened;
-		},
+		}
 	},
 };
 </script>
