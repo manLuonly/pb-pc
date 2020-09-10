@@ -29,7 +29,7 @@ router.beforeEach(async(to, from, next) => {
                 next();
             } else {
                 store.commit("user/setAddRouters", role);
-                next({...to, replace: true });
+                next('/login');
             }
         }
     } else {
