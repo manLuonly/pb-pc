@@ -1,3 +1,5 @@
+//存放常量的地方
+
 
 export const dateFormat = "YYYY-MM-DD"
 

@@ -24,12 +24,12 @@
 		:disabled-date="isDisabledAfterToday ? disabledAfterToday : notLimitDate"
 		:show-time-panel="showTimeRangePanel"
 		@close="showTimeRangePanel = false"
-        style="width:360px"
+		:style="{width:type === 'date' ? '240px' : '360px' }"
 	>
 		<svg aria-hidden="true" slot="icon-calendar">
 			<use xlink:href="#iconrili" />
 		</svg>
-		<template v-slot:footer>
+		<template v-slot:footer v-if="type === 'datetime'">
 			<button
 				class="mx-btn mx-btn-text"
 				@click="showTimeRangePanel = !showTimeRangePanel"
@@ -109,8 +109,8 @@ export default {
 		 *
 		 */
 		selectChange(value, type) {
-            value = this.$utils._.compact(value)
-            const valueLen = value.length
+			value = this.$utils._.compact(value);
+			const valueLen = value.length;
 
 			//更新传进来的time
 			this.$emit("update:time", valueLen > 0 ? value : ["", ""]);
