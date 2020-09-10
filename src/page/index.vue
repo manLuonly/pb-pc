@@ -9,7 +9,7 @@ import { demo } from '@/service'
 export default {
     name: "",
     mounted() {
-        demo()
+        demo
     }
 };
 </script>

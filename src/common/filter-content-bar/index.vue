@@ -1,14 +1,28 @@
+<!-- 显示筛选条件的块 -->
 <template>
-	<div class="filter_content_bar">{{text ? '筛选内容：' + text : '暂时没有筛选内容哦~'}}</div>
+	<div class="filter_content_bar">
+        <div v-if="$utils._.size(text)" class="text-ellipsis-1">
+            筛选内容:
+            <span v-for="(value, key, i) in text" :key="i">
+                <span class="zngl-orange">{{key}}</span>:{{value}};&nbsp;
+            </span>
+        </div>
+        <div v-else>
+            暂时没有筛选内容哦~
+        </div>
+    </div>
 </template>
 
 <script>
 export default {
 	name: "filter-content-bar",
 	props: {
+        /**
+         * key值为筛选名称，value为筛选的值
+         */
 		text: {
-			type: String,
-			default: "",
+			type: Object,
+			default:()=>({})
 		},
 	},
 };
