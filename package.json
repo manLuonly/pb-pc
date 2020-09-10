@@ -9,7 +9,6 @@
         "report": "npx vue-cli-service build --report"
     },
     "dependencies": {
-        "@babel/polyfill": "^7.10.4",
         "animate.css": "^4.1.0",
         "axios": "^0.19.0",
         "core-js": "^2.6.5",
