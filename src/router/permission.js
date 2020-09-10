@@ -23,14 +23,8 @@ router.beforeEach(async(to, from, next) => {
             next();
             NProgress.done();
         } else {
-            const hasRoles =
-                store.getters.routers && store.getters.routers.length > 0;
-            if (hasRoles) {
-                next();
-            } else {
-                store.commit("user/setAddRouters", role);
-                next('/login');
-            }
+            store.commit("user/setAddRouters", role);
+            next();
         }
     } else {
         if (whiteList.indexOf(to.path) !== -1) {
