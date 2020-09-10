@@ -1,4 +1,3 @@
-// vue.config.js
 const CompressionWebpackPlugin = require("compression-webpack-plugin");
 
 // 是否使用gzip
@@ -8,7 +7,7 @@ const productionGzipExtensions = ["js", "css"];
 // 开发端口 port
 const port = process.env.port || process.env.npm_config_port || 9000;
 //代理地址
-const devServerProxyTargetUrl = "https://m.maoyan.com/ajax"
+const devServerProxyTargetUrl = "https://m.maoyan.com/ajax";
 
 module.exports = {
     /**
@@ -38,18 +37,16 @@ module.exports = {
         }
     },
     configureWebpack: config => {
-        const myConfig = {
-            performance: {
-                hints: false
-            }
-        };
         if (process.env.NODE_ENV === "production") {
-            myConfig.plugins = [];
+            config.performance = {
+                hints: false
+            };
 
             // 构建时开启gzip，降低服务器压缩对CPU资源的占用，服务器也要相应开启gzip
             productionGzip &&
-                myConfig.plugins.push(
+                config.plugins.push(
                     new CompressionWebpackPlugin({
+                        algorithm: 'gzip',
                         test: new RegExp(
                             "\\.(" + productionGzipExtensions.join("|") + ")$"
                         ),
@@ -59,12 +56,20 @@ module.exports = {
                     })
                 );
         }
-        return myConfig;
     },
 
     chainWebpack: config => {
-        // 指定入口  es6转es5
-        config.entry.app = ["./src/main.js"];
+        // ============压缩图片 start============
+        config.module
+            .rule("images")
+            .use("image-webpack-loader")
+            .loader("image-webpack-loader")
+            .options({
+                bypassOnDebug: true
+            })
+            .end();
+        // ============压缩图片 end============
+
         /**
          * 删除懒加载模块的prefetch，降低带宽压力
          * https://cli.vuejs.org/zh/guide/html-and-static-assets.html#prefetch
@@ -72,18 +77,6 @@ module.exports = {
          */
         config.plugins.delete("preload");
         config.plugins.delete("prefetch");
-        /**
-         * 它的作用是阻止标签元素间生成空白内容
-         */
-        config.module
-            .rule("vue")
-            .use("vue-loader")
-            .loader("vue-loader")
-            .tap(options => {
-                options.compilerOptions.preserveWhitespace = true;
-                return options;
-            })
-            .end();
 
         // https://webpack.js.org/configuration/devtool/#development
         // 此选项控制是否以及如何生成源映射（选择一种源映射样式，以增强调试过程。这些值会极大地影响构建和重建速度）

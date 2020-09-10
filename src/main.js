@@ -29,6 +29,7 @@ Vue.use(ElementUI, { size: "small" });
 Vue.use(commonComponents);
 Vue.use(common);
 
+
 Vue.config.productionTip = false;
 
 new Vue({
