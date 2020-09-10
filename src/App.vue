@@ -12,7 +12,7 @@ export default {
 
 <style lang="scss">
 //阿里iconfont
-@import url("//at.alicdn.com/t/font_2009053_u53dnmk0pz.css");
+@import url("//at.alicdn.com/t/font_2058857_j4qpsicl4vd.css");
 
 #app {
 	height: 100%;

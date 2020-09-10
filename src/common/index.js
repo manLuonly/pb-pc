@@ -7,6 +7,8 @@ import filterContentBar from "./filter-content-bar";
 import tip from "./tip";
 import fullScreen from "./full-screen";
 import loadingImage from "./loading-image";
+import zDatePicker from "./z-date-picker";
+import zDateRange from "./z-date-range";
 
 const componentsMap = {
     headerTool,
@@ -14,6 +16,8 @@ const componentsMap = {
     tip,
     fullScreen,
     loadingImage,
+    zDatePicker,
+    zDateRange
 };
 
 /**
