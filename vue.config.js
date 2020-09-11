@@ -1,5 +1,6 @@
 const ParallelUglifyPlugin = require("webpack-parallel-uglify-plugin");
 const CompressionWebpackPlugin = require("compression-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
 //引入webpack库
 var webpack = require("webpack");
 
@@ -41,6 +42,23 @@ module.exports = {
     },
     configureWebpack: config => {
         if (process.env.NODE_ENV === "production") {
+            //压缩代码 去除consolelog
+            config.optimization = {
+                minimizer: [
+                    // https://webpack.js.org/plugins/terser-webpack-plugin/
+                    new TerserPlugin({
+                        extractComments: false,
+                        terserOptions: {
+                            compress: {
+                                drop_console: true,
+                                drop_debugger: true,
+                                pure_funcs: ["console.log"]
+                            }
+                        }
+                    })
+                ]
+            };
+
             config.performance = {
                 hints: false
             };
@@ -79,7 +97,6 @@ module.exports = {
     },
 
     chainWebpack: config => {
-
         //忽略/moment/locale下的所有文件
         config
             .plugin("ignore")
