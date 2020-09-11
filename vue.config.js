@@ -81,6 +81,7 @@ module.exports = {
             //压缩代码 去除consolelog
             config.plugins.push(
                 new ParallelUglifyPlugin({
+                    //cacheDir 用于配置缓存存放的目录路径。
                     cacheDir: ".cache/",
                     uglifyES: {
                         output: {
