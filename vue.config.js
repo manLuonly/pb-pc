@@ -59,6 +59,7 @@ module.exports = {
                 ]
             };
 
+            //关闭 webpack 的性能提示
             config.performance = {
                 hints: false
             };
