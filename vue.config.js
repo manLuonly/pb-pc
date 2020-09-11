@@ -1,5 +1,7 @@
 const ParallelUglifyPlugin = require("webpack-parallel-uglify-plugin");
 const CompressionWebpackPlugin = require("compression-webpack-plugin");
+//引入webpack库
+var webpack = require("webpack");
 
 // 是否使用gzip
 const productionGzip = true;
@@ -57,7 +59,7 @@ module.exports = {
                     })
                 );
 
-            //压缩代码 优化打包速度
+            //压缩代码 去除consolelog
             config.plugins.push(
                 new ParallelUglifyPlugin({
                     cacheDir: ".cache/",
@@ -77,6 +79,12 @@ module.exports = {
     },
 
     chainWebpack: config => {
+
+        //忽略/moment/locale下的所有文件
+        config
+            .plugin("ignore")
+            .use(new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/));
+
         // ============压缩图片 start============
         config.module
             .rule("images")

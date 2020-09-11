@@ -2,7 +2,6 @@ import Vue from "vue";
 import App from "./App.vue";
 import store from "./store";
 import router from "./router";
-import ElementUI from "element-ui";
 //自定义指令
 import "@/directive";
 //自定义过滤器
@@ -11,6 +10,8 @@ import "@/filters";
 
 //自定义el主题样式
 import './styles/element-variables.scss';
+import '@/element-ui'
+
 //时间组件样式
 import 'vue2-datepicker/index.css';
 import 'vue2-datepicker/locale/zh-cn';
@@ -25,7 +26,6 @@ import common from "@/common";
 import "@/router/permission";
 
 
-Vue.use(ElementUI, { size: "small" });
 Vue.use(commonComponents);
 Vue.use(common);
 
