@@ -1,3 +1,4 @@
+const ParallelUglifyPlugin = require("webpack-parallel-uglify-plugin");
 const CompressionWebpackPlugin = require("compression-webpack-plugin");
 
 // 是否使用gzip
@@ -46,7 +47,7 @@ module.exports = {
             productionGzip &&
                 config.plugins.push(
                     new CompressionWebpackPlugin({
-                        algorithm: 'gzip',
+                        algorithm: "gzip",
                         test: new RegExp(
                             "\\.(" + productionGzipExtensions.join("|") + ")$"
                         ),
@@ -55,6 +56,23 @@ module.exports = {
                         deleteOriginalAssets: false //不删除源文件
                     })
                 );
+
+            //压缩代码 优化打包速度
+            config.plugins.push(
+                new ParallelUglifyPlugin({
+                    cacheDir: ".cache/",
+                    uglifyES: {
+                        output: {
+                            comments: false
+                        },
+                        warnings: false,
+                        compress: {
+                            drop_debugger: true,
+                            drop_console: true
+                        }
+                    }
+                })
+            );
         }
     },
 
