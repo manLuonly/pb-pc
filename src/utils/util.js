@@ -1,6 +1,10 @@
 import _ from "lodash";
 let md5 = require("js-md5");
 import dayjs from "dayjs";
+var relativeTime = require('dayjs/plugin/relativeTime')
+//配置dayjs中文包
+require('dayjs/locale/zh-cn')
+dayjs.locale('zh-cn')
 
 export default {
     /***
@@ -26,8 +30,35 @@ export default {
      * @description 用于时间格式化
      */
     dayjs: dayjs,
+    /**
+     * 时间转时间戳
+     *
+     * @param { string | date } d 时间字符串或时间
+     *
+     * @return 时间戳 (毫秒)
+     */
+    dateToTemptime(d) {
+        if (!dayjs(d).isValid()) {
+            return 0
+        }
 
+        return +dayjs(d).valueOf()
+    },
+    /**
+     * 时间显示，几秒之前，几分钟之前，几天之前....
+     *
+     * @param { string | date } d 时间字符串或时间 ，必须传今日之前的时间
+     *
+     * @return {string} 几秒之前，几分钟之前，几天之前....
+     */
+    dateDisplayBefore(d) {
+        if (!dayjs(d).isValid()) {
+            return 0
+        }
+        dayjs.extend(relativeTime)
 
+        return dayjs(d).fromNow()
+    },
     /**
      * 获取高度
      * 设置el-table 表格固定高度,
