@@ -1,5 +1,5 @@
 <template>
-	<el-image fit="contain" v-bind="$attrs" :preview-src-list="[$attrs.src]" lazy class="block">
+	<el-image fit="contain" v-bind="$attrs" :preview-src-list="[$attrs.src]" lazy class="z-db">
 		<div slot="placeholder" class="img_slot">
 			<i class="el-icon-loading"></i>
 		</div>

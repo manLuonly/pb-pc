@@ -9,6 +9,7 @@ import fullScreen from "./full-screen";
 import loadingImage from "./loading-image";
 import zDatePicker from "./z-date-picker";
 import zDateRange from "./z-date-range";
+import loadingIcon from "./loading-icon";
 
 const componentsMap = {
     headerTool,
@@ -17,7 +18,8 @@ const componentsMap = {
     fullScreen,
     loadingImage,
     zDatePicker,
-    zDateRange
+    zDateRange,
+    loadingIcon
 };
 
 /**

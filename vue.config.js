@@ -42,6 +42,7 @@ module.exports = {
     },
     configureWebpack: config => {
         if (process.env.NODE_ENV === "production") {
+
             //压缩代码 去除consolelog
             config.optimization = {
                 minimizer: [
