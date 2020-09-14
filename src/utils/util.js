@@ -35,7 +35,7 @@ export default {
      *
      * @param { string | date } d 时间字符串或时间
      *
-     * @return 时间戳 (毫秒)
+     * @return {number} 时间戳 (毫秒)
      */
     dateToTemptime(d) {
         if (!dayjs(d).isValid()) {
