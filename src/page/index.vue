@@ -1,5 +1,5 @@
 <template>
-	<div class="index" >
+	<div class="index">
 		<el-input v-model="input" placeholder="请输入内容"></el-input>
 		<zDatePicker :time.sync="time1" />
 		<zDateRange :time.sync="time2" />
