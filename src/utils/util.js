@@ -191,4 +191,23 @@ export default {
                 {}
             );
     },
+    /**
+     * 自定义定时器(原理为requestAnimationFrame)
+     *
+     * @param {Function} fn     定时的函数
+     * @param {*}        delay  定时秒数
+     *
+     */
+    cusSetInterval(fn, delay) {
+        let beginTime = Date.now();
+
+        const frameFunc = () => {
+            if ((Date.now() - beginTime) / 1000 >= delay) {
+                beginTime = Date.now()
+                fn()
+            }
+            window.requestAnimationFrame(frameFunc);
+        };
+        window.requestAnimationFrame(frameFunc);
+    },
 };
