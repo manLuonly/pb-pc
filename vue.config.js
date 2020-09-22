@@ -11,11 +11,7 @@ const productionGzipExtensions = ["js", "css"];
 // 开发端口 port
 const port = process.env.port || process.env.npm_config_port || 9000;
 //代理地址
-<<<<<<< HEAD
-const devServerProxyTargetUrl = "https://47.94.162.7:8080/hc";
-=======
 const devServerProxyTargetUrl = "http://47.94.162.7:8080/hc/";
->>>>>>> 3f6b3fc705a899ba808e10b76ae0fd8ce811f795
 
 module.exports = {
     /**

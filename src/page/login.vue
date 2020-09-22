@@ -20,11 +20,10 @@ export default {
 	},
 	methods: {
 		submitForm(loginForm) {
-			login()
+			login(loginForm)
 				.then((res) => {
-					console.log(res, "login");
 					this.$router.replace({
-						path: "/index",
+						path: "/addSlideShow",
 					});
 				})
 				.catch((err) => {

@@ -20,13 +20,8 @@ export default [{
             component: () =>
                 import ("@/page/add-slide-show"),
             meta: {
-<<<<<<< HEAD
                 icon: "el-icon-s-home",
-                title: "首页"
-=======
-                icon:"el-icon-s-home",
                 title: "首页轮播图"
->>>>>>> 3f6b3fc705a899ba808e10b76ae0fd8ce811f795
             }
         }]
     },
@@ -62,12 +57,20 @@ export default [{
                 }
             },
             {
+                path: "product-features",
+                name: "product-features",
+                component: () =>
+                    import ("@/page/product/product-features"),
+                meta: {
+                    title: "产品特点"
+                }
+            },
+            {
                 path: "product-parameter",
                 name: "product-parameter",
                 component: () =>
                     import ("@/page/product/product-parameter"),
                 meta: {
-
                     title: "产品参数"
                 }
             },

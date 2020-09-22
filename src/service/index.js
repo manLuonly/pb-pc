@@ -3,27 +3,22 @@
  */
 import axios from "@/api";
 
-//example
-// export const demo = axios({
-//     method: "get",
-//     url:
-//         "/movieOnInfoList?token=&optimus_uuid=91DA1510F1B311EA98BE01FEC09733F2C8C007C48FD340129D2B60BE60C9819E&optimus_risk_level=71&optimus_code=10",
-//     isShowMsg: false,
-//     axiosOptions: {
-//         headers: {
-//             dad: 66
-//         }
-//     }
-// });
 
 
 /**
  * 登录
  */
 export const login = params => {
-    return axios('post', '/admin/checkAdmin', params, true)
+    return axios({
+        method: "post",
+        url: "admin/checkAdmin",
+        params,
+        isForm: true
+    })
 };
-=======
+
+
+
 //首页轮播图
 export const addSlideShow = params => {
     return axios({
@@ -45,4 +40,121 @@ export const slideShowDeleteById = params => {
         url: "slideshow/deleteById"
     });
 };
->>>>>>> 3f6b3fc705a899ba808e10b76ae0fd8ce811f795
+
+
+
+//产品特点模块
+
+/**
+ * 添加产品特点
+ * @param {*} params 
+ */
+export const addTrait = params => {
+    return axios({
+        method: "post",
+        url: "proTrait/addTrait",
+        params,
+        isShowMsg: true
+    });
+};
+
+
+/**
+ * 根据产品名称查询产品特点
+ * @param {*} params 
+ */
+export const findByProName = params => {
+    return axios({
+        method: "get",
+        url: "proTrait/findByProName",
+        params,
+    });
+};
+
+
+
+/**
+ * 修改产品特点
+ * @param {*} params 
+ */
+export const updateTrait = params => {
+    return axios({
+        method: "post",
+        url: "proTrait/updateTrait",
+        params,
+        isShowMsg: true
+    });
+};
+
+
+/**
+ * 根据特点id删除特点
+ * @param {*} params 
+ */
+export const deleteById = params => {
+    return axios({
+        method: "get",
+        url: "proTrait/deleteById",
+        params,
+        isShowMsg: true
+    });
+};
+
+
+
+//关于公司
+/**
+ * 添加公司简介
+ * @param {*} params 
+ */
+export const addCompany = params => {
+    return axios({
+        method: "post",
+        url: "company/addCompany",
+        params,
+        isShowMsg: true
+    });
+};
+
+
+
+/**
+ * 查询公司简介
+ * @param {*} params 
+ */
+export const findAll = params => {
+    return axios({
+        method: "get",
+        url: "company/findAll"
+    });
+};
+
+
+
+/**
+ * 修改公司简介
+ * @param {*} params 
+ */
+export const updateCompany = params => {
+    return axios({
+        method: "post",
+        url: "company/updateCompany",
+        params,
+        isShowMsg: true
+    });
+};
+
+
+
+/**
+ * 删除公司简介
+ * @param {*} params 
+ */
+export const delCompany = params => {
+    return axios({
+        method: "get",
+        url: "company/delCompany",
+        params,
+        isShowMsg: true
+    });
+};
