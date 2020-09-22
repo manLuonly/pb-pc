@@ -16,9 +16,10 @@ export default (cb, cbParams) => {
                 instance.confirmButtonLoading = true;
                 instance.confirmButtonText = "删除中...";
 
-                cb(cbParams).finally(() => {
-                    instance.confirmButtonLoading = false;
+                cb(cbParams).then(() => {
                     done();
+                }).finally(() => {
+                    instance.confirmButtonLoading = false;
                 })
             } else {
                 done();
