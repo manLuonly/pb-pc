@@ -53,17 +53,16 @@ export default ({
             ...axiosOptions,
         })
             .then((res) => {
-                const msg = (res.data && res.data.msg) || "";
+                const msg = (res.data && res.data.message) || "";
                 const code = (res.data && res.data.code) || 0;
 
-                //状态
-                if (code === -3) {
-                    //token过期，请重写登陆
-                    removeToken();
-                    removeName("role");
-                    window.location.reload(); //重新加载
-                    return;
-                }
+                // //状态
+                // if (code === -3) {
+                //     //token过期，请重写登陆
+                //     removeToken();
+                //     window.location.reload(); //重新加载
+                //     return;
+                // }
 
                 resolve(res.data);
                 if (isShowMsg) {

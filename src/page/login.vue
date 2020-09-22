@@ -26,7 +26,7 @@ export default {
 			// 	.then(() => {
 					// const role = getRole().role;
 						this.$router.replace({
-							path: "/index",
+							path: "/addSlideShow",
 						});
 				// })
 				// .finally(() => {

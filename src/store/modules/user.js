@@ -5,7 +5,7 @@ import { removeStore } from "@/api/storage";
 const user = {
     namespaced: true,
     state: {
-        systemName:"后台管理系统",
+        systemName:"海畅涂料后台管理系统",
         userName: "",
     },
     mutations: {

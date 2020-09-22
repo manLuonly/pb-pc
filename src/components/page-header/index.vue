@@ -3,7 +3,6 @@
 	<div class="page_header">
 		<div class="system_name">{{systemName}}</div>
 		<div class="right_menu m-right-30">
-			<div>账号:{{userName}}</div>
 			<el-tooltip class="m-left-20" effect="dark" content="退出登录" placement="bottom">
 				<el-button size="small" icon="el-icon-switch-button login-out" @click="logout">退出登录</el-button>
 			</el-tooltip>
@@ -16,7 +15,7 @@ import { mapGetters } from "vuex";
 export default {
 	name: "page-header",
 	computed: {
-		...mapGetters(["userName", "systemName"]),
+		...mapGetters(["systemName"]),
 	},
 	methods: {
 		async logout() {
@@ -45,7 +44,7 @@ export default {
 	white-space: nowrap;
 
 	.system_name {
-		width: 210px;
+		margin-left: 20px;
 		text-align: center;
 		font-size: 24px;
 		letter-spacing: 1px;

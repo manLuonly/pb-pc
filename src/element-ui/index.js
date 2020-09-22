@@ -32,7 +32,8 @@ import {
     Loading,
     MessageBox,
     Message,
-    Notification
+    Notification,
+    Upload
 } from "element-ui";
 
 Vue.use(Pagination);
@@ -64,6 +65,7 @@ Vue.use(Container);
 Vue.use(Link);
 Vue.use(Divider);
 Vue.use(Image);
+Vue.use(Upload);
 
 Vue.use(Loading.directive);
 Vue.prototype.$ELEMENT = { size: 'small'};

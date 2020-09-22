@@ -11,17 +11,17 @@ export default [
         component: () => import("@/page/login"),
     },
     {
-        path: "/index",
-        redirect: "/index/index",
+        path: "/addSlideShow",
+        redirect: "/addSlideShow/addSlideShow",
         component: Layout,
         children: [{
-            path: "index",
-            name: "index",
+            path: "addSlideShow",
+            name: "addSlideShow",
             component: () =>
-                import ("@/page"),
+                import ("@/page/add-slide-show"),
             meta: {
                 icon:"el-icon-s-home",
-                title: "首页"
+                title: "首页轮播图"
             }
         }]
     },
