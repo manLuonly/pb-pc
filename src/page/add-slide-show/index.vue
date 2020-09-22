@@ -24,6 +24,7 @@
 			:visible.sync="dialog.visible"
 			:title="dialog.title"
 			:close-on-click-modal="false"
+            width="600px"
 			top="50px"
 		>
 			<div style="margin: -10px 0 -10px;">

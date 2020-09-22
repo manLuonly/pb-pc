@@ -46,6 +46,23 @@ export const slideShowDeleteById = params => {
 };
 
 
+//案例模块
+export const findAllComCase = params => {
+    return axios({
+        method: "get",
+        url: "comCase/findAll",
+    });
+};
+export const comCaseDeleteById = params => {
+    return axios({
+        method: "get",
+        params,
+        url: "comCase/delById",
+        isShowMsg: true
+    });
+};
+
+
 
 //产品特点模块
 

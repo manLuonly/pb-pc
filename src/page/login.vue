@@ -26,12 +26,6 @@ export default {
 						path: "/addSlideShow",
 					});
 				})
-				.catch((err) => {
-					this.$message({
-						message: "账号或密码错误",
-						type: "error",
-					});
-				});
 		},
 	},
 };
