@@ -9,10 +9,6 @@ import {
     MenuItemGroup,
     Input,
     InputNumber,
-    Radio,
-    RadioButton,
-    Checkbox,
-    CheckboxButton,
     Switch,
     Select,
     Option,
@@ -29,8 +25,6 @@ import {
     Row,
     Col,
     Card,
-    Steps,
-    Step,
     Container,
     Link,
     Divider,
@@ -50,10 +44,6 @@ Vue.use(MenuItem);
 Vue.use(MenuItemGroup);
 Vue.use(Input);
 Vue.use(InputNumber);
-Vue.use(Radio);
-Vue.use(RadioButton);
-Vue.use(Checkbox);
-Vue.use(CheckboxButton);
 Vue.use(Switch);
 Vue.use(Select);
 Vue.use(Option);
@@ -70,8 +60,6 @@ Vue.use(Icon);
 Vue.use(Row);
 Vue.use(Col);
 Vue.use(Card);
-Vue.use(Steps);
-Vue.use(Step);
 Vue.use(Container);
 Vue.use(Link);
 Vue.use(Divider);
