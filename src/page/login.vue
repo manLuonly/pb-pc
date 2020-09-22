@@ -6,7 +6,7 @@
 
 <script>
 import loginPage from "@/components/login-page";
-import { getRole } from "@/utils/auth";
+import { login } from "@/service";
 
 export default {
 	data() {
@@ -20,18 +20,19 @@ export default {
 	},
 	methods: {
 		submitForm(loginForm) {
-			// this.loading = true;
-			// this.$store
-			// 	.dispatch("Login", loginForm)
-			// 	.then(() => {
-					// const role = getRole().role;
-						this.$router.replace({
-							path: "/index",
-						});
-				// })
-				// .finally(() => {
-				// 	this.loading = false;
-				// });
+			login()
+				.then((res) => {
+					console.log(res, "login");
+					this.$router.replace({
+						path: "/index",
+					});
+				})
+				.catch((err) => {
+					this.$message({
+						message: "账号或密码错误",
+						type: "error",
+					});
+				});
 		},
 	},
 };

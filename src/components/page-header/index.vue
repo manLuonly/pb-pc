@@ -20,7 +20,7 @@ export default {
 	},
 	methods: {
 		async logout() {
-			await this.$store.dispatch("loginOut");
+			// await this.$store.dispatch("loginOut");
 			this.$router.replace(`/login?redirect=${this.$route.fullPath}`);
 		},
 	},
