@@ -1,8 +1,16 @@
 <template>
 	<div class="save-or-edit">
-		<el-form ref="form" :model="model" :rules="rules" label-width="60px">
-			<el-form-item label="轮播图" prop="name">
-                <uploadImageList @input="getImgList"/>
+		<el-form ref="form" :rules="rules" label-width="60px">
+			<el-form-item label="轮播图">
+				<el-upload
+					action
+					:http-request="appendFiles"
+					:on-remove="handleRemove"
+					list-type="picture"
+					multiple
+				>
+					<el-button size="small" type="primary">点击上传</el-button>
+				</el-upload>
 			</el-form-item>
 		</el-form>
 		<div class="z-flex z-row-right">
@@ -13,15 +21,12 @@
 </template>
 
 <script>
-import { addTab, editTab } from "@/service";
+import { addSlideShow } from "@/service";
 
 export default {
-	name: "saveOrEdit",
+    name: "saveOrEdit",
 	data() {
 		return {
-			model: {
-				file: "",
-			},
 			rules: {
 				select_color: [
 					{
@@ -30,33 +35,44 @@ export default {
 						trigger: "blur",
 					},
 				],
-            },
-            submitLoading:false
+			},
+            submitLoading: false,
+            filesMap:{}
 		};
 	},
 	methods: {
 		cancel() {
 			this.$emit("update:visible", false);
 		},
-		getImgList(filse) {
-			console.log(filse);
+		handleRemove(file, fileList) {
+            delete this.filesMap[file.uid]
+		},
+		appendFiles(params) {
+            this.filesMap[params.file.uid] = params.file
 		},
 		submitForm() {
-			this.$refs.form.validate((valid) => {
-				if (valid) {
-					this.submitLoading = true;
-					if (this.opType == "add") {
-						addTab(this.model)
-							.then(() => {
-								this.$emit("refresh");
-								this.cancel();
-							})
-							.finally(() => {
-								this.submitLoading = false;
-							});
-					}
-				}
-			});
+            const files = Object.values(this.filesMap)
+            const filseLength = files.length
+            const formData = new FormData()
+
+            files.forEach(file=>{
+                formData.append("files", file);
+            })
+
+            if(!filseLength) {
+                this.$message.error("请上传图片后提交！")
+                return
+            }
+
+            this.submitLoading = true
+			addSlideShow(formData)
+				.then(() => {
+					this.$emit("refresh");
+					this.cancel();
+				})
+				.finally(() => {
+					this.submitLoading = false;
+				});
 		},
 	},
 };

@@ -1,14 +1,14 @@
 import Layout from "@/page/layout/index.vue";
 // 不需要用户权限的路由表
-export default [{
+export default [
+    {
         path: "/",
         redirect: "/login",
     },
     {
         path: "/login",
         name: "login",
-        component: () =>
-            import ("@/page/login"),
+        component: () => import("@/page/login"),
     },
     {
         path: "/addSlideShow",
@@ -20,13 +20,8 @@ export default [{
             component: () =>
                 import ("@/page/add-slide-show"),
             meta: {
-<<<<<<< HEAD
-                icon: "el-icon-s-home",
-                title: "首页"
-=======
                 icon:"el-icon-s-home",
                 title: "首页轮播图"
->>>>>>> 3f6b3fc705a899ba808e10b76ae0fd8ce811f795
             }
         }]
     },

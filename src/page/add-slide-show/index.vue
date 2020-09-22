@@ -8,7 +8,11 @@
 			:height="$utils.getTableHeight(1)"
 		>
 			<el-table-column width="50" label="序号" type="index" align="center"></el-table-column>
-			<el-table-column prop="imageUrl" label="图片路径" align="center" ></el-table-column>
+			<el-table-column prop="imageUrl" label="图片" align="center">
+				<template slot-scope="scope">
+					<loadingImage :src="scope.row.imageUrl" style="width:100px; height:50px" />
+				</template>
+			</el-table-column>
 			<el-table-column label="操作" align="center" width="140">
 				<template slot-scope="scope">
 					<el-button type="danger" @click="deleteSlide(scope.row.id)">删除</el-button>
@@ -16,18 +20,14 @@
 			</el-table-column>
 		</el-table>
 
-        <el-dialog
+		<el-dialog
 			:visible.sync="dialog.visible"
 			:title="dialog.title"
 			:close-on-click-modal="false"
 			top="50px"
 		>
 			<div style="margin: -10px 0 -10px;">
-				<save-or-edit
-					:visible.sync="dialog.visible"
-					@refresh="getSilde"
-					v-if="dialog.visible"
-				/>
+				<save-or-edit :visible.sync="dialog.visible" @refresh="getSilde" v-if="dialog.visible" />
 			</div>
 		</el-dialog>
 	</el-card>
@@ -35,27 +35,27 @@
 
 <script>
 import { findAllSlideShow, slideShowDeleteById } from "@/service";
-import alert from '@/utils/alert'
-import saveOrEdit from './saveOrEdit'
+import alert from "@/utils/alert";
+import saveOrEdit from "./saveOrEdit";
 
 export default {
-    name: "add-slide-show",
-    components:{
-        saveOrEdit
-    },
+	name: "add-slide-show",
+	components: {
+		saveOrEdit,
+	},
 	data() {
 		return {
 			tableLoading: false,
-            tableData: [],
-            dialog:{
-                title:"",
-                visible:false
-            }
+			tableData: [],
+			dialog: {
+				title: "",
+				visible: false,
+			},
 		};
 	},
 	created() {
 		this.getSilde();
-    },
+	},
 	methods: {
 		getSilde() {
 			this.tableLoading = true;
@@ -68,9 +68,11 @@ export default {
 				});
 		},
 		deleteSlide(id) {
-            alert(slideShowDeleteById({id}))
-        },
-        saveOrEdit(title) {
+			alert(slideShowDeleteById, { id }).then(() => {
+				this.getSilde();
+			});
+		},
+		saveOrEdit(title) {
 			this.dialog.title = title;
 			this.dialog.visible = true;
 		},
