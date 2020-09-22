@@ -12,10 +12,6 @@ import "@/filters";
 import './styles/element-variables.scss';
 import '@/element-ui'
 
-//时间组件样式
-import 'vue2-datepicker/index.css';
-//配置时间组件中文包
-import 'vue2-datepicker/locale/zh-cn';
 //定制的CSS文件，它让不同的浏览器在渲染网页元素的时候形式更统一
 import 'normalize.css/normalize.css'
 //引入animate.css
