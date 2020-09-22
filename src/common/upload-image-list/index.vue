@@ -13,6 +13,7 @@
 			<!-- 动态设置limit -->
 			<el-upload
 				:action="$uploadImgUrl"
+				name="files"
 				:show-file-list="false"
 				:before-upload="beforeUpload"
 				:on-progress="onProgress"
@@ -21,7 +22,7 @@
 				:on-exceed="handleExceed"
 				multiple
 			>
-				<div class="d-flex align-items-center justify-content-center w-100 h-100">
+				<div class="z-flex z-col-center z-row-center w-100 h-100">
 					<el-button icon="el-icon-plus" type="text" size="medium">上传图片</el-button>
 				</div>
 			</el-upload>
@@ -31,7 +32,7 @@
 			<div style="margin: -15px -20px">
 				<el-carousel v-if="dialogVisible" height="550px" :initial-index="initIndex">
 					<el-carousel-item v-for="(item,index) in dataList" :key="index">
-						<div class="d-flex align-items-center justify-content-center h-100">
+						<div class="z-flex z-col-center z-row-center h-100">
 							<el-image :src="item" fit="contain">
 								<div slot="placeholder" class="img_slot">
 									<i class="el-icon-loading"></i>
@@ -112,18 +113,18 @@ export default {
 			this.loading = true;
 		},
 		onSuccess(__resultData) {
-			switch (__resultData.code) {
-				case 200:
+			// switch (__resultData.code) {
+			// 	case 200:
 					this.loading = false;
 					// this.$message.success(__resultData.message);
-					this.dataList.push(__resultData.data);
-					break;
+					this.dataList.push(__resultData.imgUrl1);
+			// 		break;
 
-				default:
-					this.$message.error("上传失败");
-					this.loading = false;
-					break;
-			}
+			// 	default:
+			// 		// this.$message.error("上传失败");
+			// 		this.loading = false;
+			// 		break;
+			// }
 		},
 		remove(__index) {
 			this.dataList.splice(__index, 1);
@@ -139,6 +140,7 @@ export default {
 <style lang="scss" scoped>
 .upload {
 	display: flex;
+	flex-wrap: wrap;
 	margin: -5px;
 
 	/deep/ .el-upload {

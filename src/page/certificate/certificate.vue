@@ -1,29 +1,31 @@
 <template>
 	<el-card>
-		<el-button type="primary" slot="header" @click="saveOrEdit('新增')">新增</el-button>
+		<el-button type="primary" slot="header" @click="saveOrEdit({},'新增')">新增</el-button>
 		<el-table
 			:data="tableData"
 			style="width: 100%"
 			:loading="tableLoading"
 			:height="$utils.getTableHeight(1)"
 		>
-			<el-table-column prop="comName" label="公司名称" align="center"></el-table-column>
-			<el-table-column prop="comContent" label="公司简介" align="center"></el-table-column>
+			<el-table-column prop="certName" label="资质证书名称" align="center"></el-table-column>
 			<el-table-column prop="imageUrl" label="图片路径" align="center">
-				<template>
+				<template slot-scope="scope">
 					<el-image
-						style="width: 100px; height: 100px"
-						:src="img || '' "
+						v-if="scope.row.certImgList"
+						style="width: 100px; height: 50px;cursor: pointer;"
+						:src="scope.row.certImgList[0].imgUrl || '' "
 						fit="contain"
 						:preview-src-list="srcList"
-						@click="getImgUrl(img)"
+						@click="getImgUrl(scope.row.certImgList)"
 					></el-image>
 				</template>
 			</el-table-column>
 			<el-table-column label="操作" align="center" width="140">
 				<template slot-scope="scope">
-					<el-button >修改</el-button>
-					<el-button type="danger" @click="deleteCompany(scope.row.id)">删除</el-button>
+					<el-button-group>
+						<el-button type="primary" @click="saveOrEdit(scope.row,'编辑')">修改</el-button>
+						<el-button type="danger" @click="deleteComCert(scope.row.id)">删除</el-button>
+					</el-button-group>
 				</template>
 			</el-table-column>
 		</el-table>
@@ -35,16 +37,21 @@
 			top="50px"
 		>
 			<div style="margin: -10px 0 -10px;">
-				<!-- <company-dialog :visible.sync="dialog.visible" @refresh="getDataList" v-if="dialog.visible" /> -->
+				<certificate-dialog
+					v-if="dialog.visible"
+					:visible.sync="dialog.visible"
+					:dialogRow="dialog.dialogRow"
+					@refresh="getDataList"
+				/>
 			</div>
 		</el-dialog>
 	</el-card>
 </template>
 
 <script>
-import { findAll, delCompany } from "@/service";
+import { comCertFindAll, comCertDeleteById } from "@/service";
 import alert from "@/utils/alert";
-// import companyDialog from "./company-dialog";
+import certificateDialog from "./certificate-dialog";
 
 export default {
 	name: "about-company",
@@ -55,37 +62,41 @@ export default {
 			dialog: {
 				title: "",
 				visible: false,
+				dialogRow: {},
 			},
 			srcList: [],
-			img: "",
 		};
 	},
 	components: {
-		// companyDialog,
+		certificateDialog,
 	},
 	mounted() {
 		this.getDataList();
 	},
 	methods: {
 		getDataList() {
-			findAll().then((res) => {
+			comCertFindAll().then((res) => {
 				this.tableData = res || [];
-				this.img = res[0].imgList[0].imgUrl || '';
 			});
 		},
-		saveOrEdit(title) {
+		saveOrEdit(row,title) {
+			this.dialog.dialogRow = { ...row };
 			this.dialog.title = title;
 			this.dialog.visible = true;
 		},
-		deleteCompany(id) {
-      alert(delCompany, { id }).then(() => {
+		// 删除证书
+		deleteComCert(id) {
+			alert(comCertDeleteById, { id }).then(() => {
 				this.getDataList();
 			});
 		},
-		getImgUrl(url) {
+		// 展示图片
+		getImgUrl(arr) {
 			this.srcList = [];
-			this.srcList.push(url);
-		},
+			arr.filter((i) => {
+				this.srcList.push(i.imgUrl);
+			});
+		}
 	},
 };
 </script>

@@ -1,11 +1,8 @@
 <template>
 	<div class="save-or-edit">
 		<el-form ref="form" :model="ruleForm" :rules="rules" label-width="100px">
-			<el-form-item label="公司名称" prop="name">
-				<el-input v-model="ruleForm.comName"></el-input>
-			</el-form-item>
-			<el-form-item label="公司简介" prop="name">
-				<el-input type="textarea" v-model="ruleForm.comContent"></el-input>
+			<el-form-item label="资质证书名称" prop="name">
+				<el-input v-model="ruleForm.certName"></el-input>
 			</el-form-item>
 			<el-form-item label="轮播图" prop="name">
 				<!-- <uploadImageList @input="getImgList" /> -->
@@ -26,8 +23,7 @@ export default {
 	data() {
 		return {
 			ruleForm: {
-				comName: "",
-				comContent: "",
+				certName: "",
 				file: "",
 			},
 			rules: {},
@@ -58,7 +54,7 @@ export default {
 			this.$refs.form.validate((valid) => {
 				if (valid) {
 					this.submitLoading = true;
-					if (this.opType == "add") {
+					if (!this.dialogRow.id) {
 						addTab(this.ruleForm)
 							.then(() => {
 								this.$emit("refresh");
@@ -67,7 +63,9 @@ export default {
 							.finally(() => {
 								this.submitLoading = false;
 							});
-					}
+					} else {
+                        
+                    }
 				}
 			});
 		},

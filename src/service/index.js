@@ -47,12 +47,34 @@ export const slideShowDeleteById = params => {
 
 
 //案例模块
+
+/**
+ * 添加案例
+ * @param {*} params 
+ */
+export const comCaseAddCase = params => {
+    return axios({
+        method: "post",
+        url: "comCase/addCase",
+        params
+    });
+};
+
+/**
+ * 查询所有案例
+ * @param {*} params 
+ */
 export const findAllComCase = params => {
     return axios({
         method: "get",
         url: "comCase/findAll",
     });
 };
+
+/**
+ * 根据案例的id删除案例
+ * @param {*} params 
+ */
 export const comCaseDeleteById = params => {
     return axios({
         method: "get",
@@ -61,6 +83,26 @@ export const comCaseDeleteById = params => {
         isShowMsg: true
     });
 };
+
+/**
+ * 修改案例
+ * @param {*} params 
+ */
+export const comCaseUpdateCase = params => {
+    return axios({
+        method: "post",
+        params,
+        url: "comCase/updateCase",
+        isShowMsg: true
+    });
+};
+
+
+
+
+
+
+
 
 
 
@@ -102,8 +144,7 @@ export const updateTrait = params => {
     return axios({
         method: "post",
         url: "proTrait/updateTrait",
-        params,
-        isShowMsg: true
+        params
     });
 };
 
@@ -112,14 +153,161 @@ export const updateTrait = params => {
  * 根据特点id删除特点
  * @param {*} params 
  */
-export const deleteById = params => {
+export const proTraitDeleteById = params => {
     return axios({
         method: "get",
         url: "proTrait/deleteById",
-        params,
-        isShowMsg: true
+        params
     });
 };
+
+
+
+
+
+
+
+
+
+
+
+// 产品和产品图模块
+
+/**
+ * 添加产品和产品图片
+ * @param {*} params 
+ */
+export const productAddProduct = params => {
+    return axios({
+        method: "post",
+        url: "product/addProduct",
+        params
+    });
+};
+
+
+
+
+/**
+ * 查询所有产品和产品图片
+ * @param {*} params 
+ */
+export const productFindAll = params => {
+    return axios({
+        method: "get",
+        url: "product/findAll"
+    });
+};
+
+
+
+/**
+ * 修改产品以及产品图片
+ * @param {*} params 
+ */
+export const productUpdatePro = params => {
+    return axios({
+        method: "post",
+        url: "product/updatePro",
+        params
+    });
+};
+
+
+
+/**
+ * 删除产品（同时删除该产品的参数以及产品原理）
+ * @param {*} params 
+ */
+export const productDeleteById = params => {
+    return axios({
+        method: "get",
+        url: "product/deleteById",
+        params
+    });
+};
+
+
+
+
+
+
+//资质证书模块
+
+/**
+ * 添加资质证书
+ * @param {*} params 
+ */
+export const addCert = params => {
+    return axios({
+        method: "post",
+        url: "comCert/addCert",
+        params
+    });
+};
+
+
+/**
+ * 查询所有资质证书
+ * @param {*} params 
+ */
+export const comCertFindAll = params => {
+    return axios({
+        method: "get",
+        url: "comCert/findAll"
+    });
+};
+
+
+
+/**
+ * 根据证书名称查询
+ * @param {*} params 
+ */
+export const findByCertName = params => {
+    return axios({
+        method: "get",
+        url: "comCert/findByCertName"
+    });
+};
+
+
+
+
+/**
+ * 修改证书
+ * @param {*} params 
+ */
+export const updateCert = params => {
+    return axios({
+        method: "post",
+        url: "comCert/updateCert"
+    });
+};
+
+
+
+/**
+ * 根据id删除资质证书
+ * @param {*} params 
+ */
+export const comCertDeleteById = params => {
+    return axios({
+        method: "post",
+        url: "comCert/deleteById"
+    });
+};
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -132,8 +320,7 @@ export const addCompany = params => {
     return axios({
         method: "post",
         url: "company/addCompany",
-        params,
-        isShowMsg: true
+        params
     });
 };
 
@@ -143,7 +330,7 @@ export const addCompany = params => {
  * 查询公司简介
  * @param {*} params 
  */
-export const findAll = params => {
+export const companyFindAll = params => {
     return axios({
         method: "get",
         url: "company/findAll"

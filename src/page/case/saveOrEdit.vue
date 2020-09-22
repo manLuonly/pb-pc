@@ -1,16 +1,17 @@
 <template>
 	<div class="save-or-edit">
-		<el-form ref="form" :rules="rules" label-width="60px">
+		<el-form ref="form" :model="ruleForm" :rules="rules" label-width="100px">
+			<el-form-item label="案例名称">
+				<el-input v-model="ruleForm.caseName"></el-input>
+			</el-form-item>
+			<el-form-item label="案例文字内容">
+				<el-input v-model="ruleForm.caseContent"></el-input>
+			</el-form-item>
+			<el-form-item label="案例地区">
+				<el-input v-model="ruleForm.caseRegion"></el-input>
+			</el-form-item>
 			<el-form-item label="轮播图">
-				<el-upload
-					action
-					:http-request="appendFiles"
-					:on-remove="handleRemove"
-					list-type="picture"
-					multiple
-				>
-					<el-button size="small" type="primary">点击上传</el-button>
-				</el-upload>
+				<uploadImageList @input="getImgList" :limit="4" :value=" ruleForm.imgUrl ? ruleForm.imgUrl.map(i => i.imgUrl) : '' "  />
 			</el-form-item>
 		</el-form>
 		<div class="z-flex z-row-right">
@@ -21,58 +22,66 @@
 </template>
 
 <script>
-import { addSlideShow } from "@/service";
+import { comCaseAddCase, comCaseUpdateCase } from "@/service";
 
 export default {
-    name: "saveOrEdit",
+	name: "saveOrEdit",
 	data() {
 		return {
-			rules: {
-				select_color: [
-					{
-						required: true,
-						message: "请选择选中文字颜色",
-						trigger: "blur",
-					},
-				],
+			ruleForm: {
+				id: 0,
+				caseName: "",
+				caseContent: "",
+				caseRegion: "",
+				imgUrl:[],
 			},
-            submitLoading: false,
-            filesMap:{}
+			rules: {},
+			submitLoading: false,
+			filesMap: {},
 		};
+	},
+	props: {
+		dialogRow: Object,
+		default: () => {},
+	},
+	mounted() {
+		if (!this.dialogRow.id) {
+			this.$nextTick(() => {
+				this.$refs["form"].resetFields();
+			});
+		} else {
+			this.ruleForm = this.dialogRow;
+			this.ruleForm.imgUrl = this.dialogRow.caseImgList;
+		}
 	},
 	methods: {
 		cancel() {
 			this.$emit("update:visible", false);
 		},
-		handleRemove(file, fileList) {
-            delete this.filesMap[file.uid]
-		},
-		appendFiles(params) {
-            this.filesMap[params.file.uid] = params.file
+		getImgList(filse) {
+			this.ruleForm.imgUrl = filse;
 		},
 		submitForm() {
-            const files = Object.values(this.filesMap)
-            const filseLength = files.length
-            const formData = new FormData()
-
-            files.forEach(file=>{
-                formData.append("files", file);
-            })
-
-            if(!filseLength) {
-                this.$message.error("请上传图片后提交！")
-                return
-            }
-
-            this.submitLoading = true
-			addSlideShow(formData)
-				.then(() => {
-					this.$emit("refresh");
-					this.cancel();
-				})
-				.finally(() => {
-					this.submitLoading = false;
-				});
+			this.submitLoading = true;
+			if (!this.dialogRow.id) {
+				comCaseAddCase(this.ruleForm)
+					.then(() => {
+						this.$emit("refresh");
+						this.cancel();
+					})
+					.finally(() => {
+						this.submitLoading = false;
+					});
+			} else {
+				comCaseUpdateCase(this.ruleForm)
+					.then((res) => {
+						this.$emit("refresh");
+						this.cancel();
+					})
+					.finally(() => {
+						this.submitLoading = false;
+					});
+			}
 		},
 	},
 };

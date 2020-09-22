@@ -1,6 +1,6 @@
 <template>
 	<el-card>
-		<el-button type="primary" slot="header" @click="saveOrEdit('新增')">新增</el-button>
+		<el-button type="primary" slot="header" @click="saveOrEdit({},'新增')">新增</el-button>
 		<el-table
 			:data="tableData"
 			style="width: 100%"
@@ -11,7 +11,7 @@
 			<el-table-column prop="caseName" label="名称" align="center" show-overflow-tooltip></el-table-column>
 			<el-table-column prop="caseContent" label="文字内容" align="center" show-overflow-tooltip></el-table-column>
 			<el-table-column prop="caseRegion" label="地区" align="center"></el-table-column>
-			<el-table-column  label="案例图片" align="center">
+			<el-table-column label="案例图片" align="center">
 				<template slot-scope="scope">
 					<loadingImage
 						:src="scope.row.caseImgList[0] ? scope.row.caseImgList[0].imgUrl : ''"
@@ -23,7 +23,7 @@
 			<el-table-column label="操作" align="center" width="140">
 				<template slot-scope="scope">
 					<el-button-group>
-						<el-button type="primary" @click="saveOrEdit('编辑')">编辑</el-button>
+						<el-button type="primary" @click="saveOrEdit(scope.row,'编辑')">编辑</el-button>
 						<el-button type="danger" @click="deleteSlide(scope.row.id)">删除</el-button>
 					</el-button-group>
 				</template>
@@ -34,11 +34,16 @@
 			:visible.sync="dialog.visible"
 			:title="dialog.title"
 			:close-on-click-modal="false"
-			width="600px"
+			width="700px"
 			top="50px"
 		>
 			<div style="margin: -10px 0 -10px;">
-				<save-or-edit :visible.sync="dialog.visible" @refresh="getSilde" v-if="dialog.visible" />
+				<save-or-edit
+					v-if="dialog.visible"
+					:visible.sync="dialog.visible"
+					:dialogRow="dialog.dialogRow"
+					@refresh="getSilde"
+				/>
 			</div>
 		</el-dialog>
 	</el-card>
@@ -61,12 +66,13 @@ export default {
 			dialog: {
 				title: "",
 				visible: false,
+				dialogRow: {},
 			},
 		};
 	},
 	created() {
 		this.getSilde();
-    },
+	},
 	methods: {
 		getSilde() {
 			this.tableLoading = true;
@@ -83,13 +89,14 @@ export default {
 				this.getSilde();
 			});
 		},
-		saveOrEdit(title) {
+		saveOrEdit(row, title) {
+			this.dialog.dialogRow = { ...row };
 			this.dialog.title = title;
 			this.dialog.visible = true;
-        },
-        handleCaseImgList({caseImgList}) {
-            return caseImgList.map(item=>item.imgUrl)
-        }
+		},
+		handleCaseImgList({ caseImgList }) {
+			return caseImgList.map((item) => item.imgUrl);
+		},
 	},
 };
 </script>
