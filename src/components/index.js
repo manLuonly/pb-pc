@@ -4,7 +4,6 @@ const componentsMap = {
     pagination
 };
 
-
 /**
  * 存放业务组件
  */

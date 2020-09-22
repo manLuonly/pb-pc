@@ -12,7 +12,7 @@
 		<div class="upload-list-item" v-if="!limit || dataList.length < limit" slot="footer">
 			<!-- 动态设置limit -->
 			<el-upload
-				:action="$uploadImgUrl"
+				:http-request="aa"
 				:show-file-list="false"
 				:before-upload="beforeUpload"
 				:on-progress="onProgress"
@@ -131,7 +131,10 @@ export default {
 		show(__index) {
 			this.dialogVisible = true;
 			this.initIndex = __index;
-		},
+        },
+        aa(...result) {
+            console.log(result);
+        }
 	},
 };
 </script>

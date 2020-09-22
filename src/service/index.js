@@ -23,3 +23,26 @@ import axios from "@/api";
 export const login = params => {
     return axios('post', '/admin/checkAdmin', params, true)
 };
+=======
+//首页轮播图
+export const addSlideShow = params => {
+    return axios({
+        method: "post",
+        url: "slideshow/addSlideShow",
+        isShowMsg: true
+    });
+};
+export const findAllSlideShow = params => {
+    return axios({
+        method: "get",
+        url: "slideshow/findAll"
+    });
+};
+export const slideShowDeleteById = params => {
+    return axios({
+        method: "get",
+        params,
+        url: "slideshow/deleteById"
+    });
+};
+>>>>>>> 3f6b3fc705a899ba808e10b76ae0fd8ce811f795
