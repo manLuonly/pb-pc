@@ -78,10 +78,9 @@ export default {
 			this.dialog.visible = true;
 		},
 		deleteCompany(id) {
-      // alert();
-      this.$msgbox().then(res => {
-        delCompany({ id })
-      })
+      alert(delCompany, { id }).then(() => {
+				this.getDataList();
+			});
 		},
 		getImgUrl(url) {
 			this.srcList = [];

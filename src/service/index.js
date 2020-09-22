@@ -3,8 +3,6 @@
  */
 import axios from "@/api";
 
-
-
 /**
  * 登录
  */
@@ -18,12 +16,17 @@ export const login = params => {
 };
 
 
-
 //首页轮播图
 export const addSlideShow = params => {
     return axios({
         method: "post",
+        params,
         url: "slideshow/addSlideShow",
+        axiosOptions: {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        },
         isShowMsg: true
     });
 };
@@ -37,7 +40,8 @@ export const slideShowDeleteById = params => {
     return axios({
         method: "get",
         params,
-        url: "slideshow/deleteById"
+        url: "slideshow/deleteById",
+        isShowMsg: true
     });
 };
 
