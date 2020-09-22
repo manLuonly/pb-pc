@@ -25,7 +25,9 @@ import variables from "@/styles/variables.scss";
 export default {
 	components: { SidebarItem },
 	computed: {
-		...mapGetters(["routers"]),
+        routers() {
+            return this.$router.options.routes
+        },
 		activeMenu() {
 			const route = this.$route;
 			const { meta, path } = route;

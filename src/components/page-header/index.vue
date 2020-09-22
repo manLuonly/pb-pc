@@ -4,7 +4,6 @@
 		<div class="system_name">{{systemName}}</div>
 		<div class="right_menu m-right-30">
 			<div>账号:{{userName}}</div>
-			<fullScreen class="m-left-20" />
 			<el-tooltip class="m-left-20" effect="dark" content="退出登录" placement="bottom">
 				<el-button size="small" icon="el-icon-switch-button login-out" @click="logout">退出登录</el-button>
 			</el-tooltip>

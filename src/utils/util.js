@@ -18,7 +18,7 @@ export default {
      *
      * @param
      *
-     * @example this.$utils.md5("lijiacheng")
+     * @example this.$utils.md5("")
      *
      * @return {string} 加密后的字符串
      */
@@ -190,24 +190,5 @@ export default {
                 ),
                 {}
             );
-    },
-    /**
-     * 自定义定时器(原理为requestAnimationFrame)
-     *
-     * @param {Function} fn     定时的函数
-     * @param {*}        delay  定时秒数
-     *
-     */
-    cusSetInterval(fn, delay) {
-        let beginTime = Date.now();
-
-        const frameFunc = () => {
-            if ((Date.now() - beginTime) / 1000 >= delay) {
-                beginTime = Date.now()
-                fn()
-            }
-            window.requestAnimationFrame(frameFunc);
-        };
-        window.requestAnimationFrame(frameFunc);
     },
 };

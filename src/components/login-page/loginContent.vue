@@ -1,6 +1,6 @@
 <template>
 	<div class="content">
-		<h2 class="title">欢迎登录海鲜系统</h2>
+		<h2 class="title">欢迎后台系统</h2>
 		<el-form class="form-c" :model="form" :rules="rules" ref="form">
 			<el-form-item prop="username">
 				<el-input

@@ -11,8 +11,6 @@ export default {
 </script>
 
 <style lang="scss">
-//阿里iconfont
-@import url("//at.alicdn.com/t/font_2058857_4iezc76bzzo.css");
 
 #app {
 	height: 100%;

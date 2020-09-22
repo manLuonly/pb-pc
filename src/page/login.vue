@@ -25,13 +25,9 @@ export default {
 			// 	.dispatch("Login", loginForm)
 			// 	.then(() => {
 					// const role = getRole().role;
-					// if (role === "ROLE_ADMIN") {
-					// 	this.$router.replace({ path: "/" });
-					// } else {
 						this.$router.replace({
 							path: "/index",
 						});
-					// }
 				// })
 				// .finally(() => {
 				// 	this.loading = false;

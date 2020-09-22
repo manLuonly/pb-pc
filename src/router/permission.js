@@ -1,8 +1,7 @@
 import router from "@/router";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
-import { getToken, getName } from "@/utils/auth";
-import store from "@/store";
+import { getToken } from "@/utils/auth";
 
 NProgress.configure({
     showSpinner: false
@@ -16,14 +15,12 @@ router.beforeEach(async(to, from, next) => {
 
     // //获取
     const hasToken = getToken("token") || 666;
-    const role = getName("role") || "ROLE_ADMIN";
 
-    if (hasToken && role) {
+    if (hasToken) {
         if (to.path === "/login") {
             next();
             NProgress.done();
         } else {
-            store.commit("user/setAddRouters", role);
             next();
         }
     } else {
