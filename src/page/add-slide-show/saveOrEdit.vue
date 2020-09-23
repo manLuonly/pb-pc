@@ -43,8 +43,8 @@ export default {
 		cancel() {
 			this.$emit("update:visible", false);
 		},
-		getImgList(filse) {
-			this.ruleForm.imgUrl = filse;
+		getImgList(files) {
+			this.ruleForm.imgUrl = files;
 		},
 		submitForm() {
 			this.$refs.form.validate((valid) => {
