@@ -104,7 +104,6 @@ function addLoadEvent(func) {
 
 var supportsPromise = typeof Promise !== "undefined" && Object.prototype.toString.call(Promise.resolve()) === '[object Promise]';
 
-//call plugin function after DOM ready
 if (false === supportsPromise) {
     outdatedBrowser({
         bgColor: '#f25648',

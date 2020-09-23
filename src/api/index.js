@@ -1,5 +1,4 @@
 import axios from "./config";
-// 引入qs模块，用来序列化post类型的数据
 import QS from "qs";
 import { showMsg } from "@/utils/message";
 import { removeToken, removeName, getToken } from "@/utils/auth";
