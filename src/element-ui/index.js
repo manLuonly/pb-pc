@@ -4,6 +4,9 @@ import {
     Scrollbar,
     Dialog,
     Menu,
+    Dropdown,
+    DropdownMenu,
+    DropdownItem,
     Submenu,
     MenuItem,
     MenuItemGroup,
@@ -40,6 +43,9 @@ import {
 } from "element-ui";
 
 Vue.use(Pagination);
+Vue.use(Dropdown);
+Vue.use(DropdownMenu);
+Vue.use(DropdownItem);
 Vue.use(Scrollbar);
 Vue.use(Dialog);
 Vue.use(Menu);
@@ -77,7 +83,7 @@ Vue.use(CarouselItem);
 
 
 Vue.use(Loading.directive);
-Vue.prototype.$ELEMENT = { size: 'small'};
+Vue.prototype.$ELEMENT = { size: 'small' };
 
 Vue.prototype.$loading = Loading.service;
 Vue.prototype.$msgbox = MessageBox;

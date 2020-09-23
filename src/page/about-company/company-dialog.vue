@@ -1,14 +1,14 @@
 <template>
 	<div class="save-or-edit">
 		<el-form ref="form" :model="ruleForm" :rules="rules" label-width="100px">
-			<el-form-item label="公司名称" prop="name">
+			<el-form-item label="公司名称" prop="comName">
 				<el-input v-model="ruleForm.comName"></el-input>
 			</el-form-item>
-			<el-form-item label="公司简介" prop="name">
+			<el-form-item label="公司简介" prop="comContent">
 				<el-input type="textarea" v-model="ruleForm.comContent"></el-input>
 			</el-form-item>
 			<el-form-item label="轮播图" prop="name">
-				<!-- <uploadImageList @input="getImgList" /> -->
+				<uploadImageList @input="getImgList" :limit="4" :value="ruleForm.imgUrl" />
 			</el-form-item>
 		</el-form>
 		<div class="z-flex z-row-right">
@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import {} from "@/service";
+import { addCompany, updateCompany } from "@/service";
 
 export default {
 	name: "company-dialog",
@@ -28,9 +28,24 @@ export default {
 			ruleForm: {
 				comName: "",
 				comContent: "",
-				file: "",
+				imgUrl: "",
 			},
-			rules: {},
+			rules: {
+				comName: [{ required: true, message: "不能为空" }],
+				comContent: [{ required: true, message: "不能为空" }],
+				imgUrl: [
+					{
+						trigger: "blur",
+						validator: (rule, value, callback) => {
+							if (!value.length || !value) {
+								callback(new Error("请上传图片后提交！"));
+							} else {
+								callback();
+							}
+						},
+					},
+				],
+			},
 			submitLoading: false,
 		};
 	},
@@ -39,12 +54,18 @@ export default {
 		default: () => {},
 	},
 	mounted() {
-		if (!this.dialogRow.id) {
-			this.$nextTick(() => {
-				this.$refs["form"].resetFields();
+		if (this.dialogRow.id) {
+			const { id, comName, comContent, imgList } = this.dialogRow;
+			const _imgList = imgList.map((item) => item.imgUrl);
+			Object.assign(this.ruleForm, {
+				id,
+				comName,
+				comContent,
+				imgUrl:
+					Array.isArray(_imgList) && _imgList.length
+						? _imgList.join(",")
+						: "",
 			});
-		} else {
-			this.ruleForm = this.dialogRow;
 		}
 	},
 	methods: {
@@ -52,14 +73,31 @@ export default {
 			this.$emit("update:visible", false);
 		},
 		getImgList(filse) {
-			console.log(filse);
+			this.ruleForm.imgUrl = filse;
 		},
 		submitForm() {
 			this.$refs.form.validate((valid) => {
 				if (valid) {
 					this.submitLoading = true;
-					if (this.opType == "add") {
-						addTab(this.ruleForm)
+
+					const { ruleForm } = this;
+					const params = {
+						...ruleForm,
+						imgUrl: Array.isArray(ruleForm.imgUrl)
+							? ruleForm.imgUrl.join(",")
+							: ruleForm.imgUrl,
+					};
+					if (!this.dialogRow.id) {
+						addCompany(params)
+							.then(() => {
+								this.$emit("refresh");
+								this.cancel();
+							})
+							.finally(() => {
+								this.submitLoading = false;
+							});
+					} else {
+						updateCompany(params)
 							.then(() => {
 								this.$emit("refresh");
 								this.cancel();

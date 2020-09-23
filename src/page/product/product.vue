@@ -1,12 +1,13 @@
 <template>
 	<el-card>
-		<el-button type="primary" slot="header" @click="saveOrEdit('新增')">新增</el-button>
+		<el-button type="primary" slot="header" @click="saveOrEdit({},'新增')">新增</el-button>
 		<el-table
 			:data="tableData"
 			style="width: 100%"
 			:loading="tableLoading"
 			:height="$utils.getTableHeight(1)"
 		>
+			<el-table-column width="50" label="序号" type="index" align="center"></el-table-column>
 			<el-table-column prop="proName" label="产品名称" align="center"></el-table-column>
 			<el-table-column prop="proIntro" label="产品简介" align="center" show-overflow-tooltip></el-table-column>
 			<el-table-column prop="proContrast" label="和普通材料的对比" align="center" show-overflow-tooltip></el-table-column>
@@ -25,9 +26,22 @@
 			<el-table-column label="操作" align="center" width="200">
 				<template slot-scope="scope">
 					<el-button-group>
-						<el-button type="primary" @click="updateProduct(scope.row)">修改</el-button>
+						<el-button type="primary" @click="saveOrEdit(scope.row,'编辑')">修改</el-button>
 						<el-button type="danger" @click="deleteProduct(scope.row.id)">删除</el-button>
-						<el-button type="info">操作</el-button>
+						<el-dropdown @command="handleCommand">
+							<el-button type="info">操作</el-button>
+							<el-dropdown-menu slot="dropdown">
+								<el-dropdown-item
+									:command="beforeHandleCommand(scope.$index, scope.row,'productFeatures')"
+								>产品特点</el-dropdown-item>
+								<el-dropdown-item
+									:command="beforeHandleCommand(scope.$index, scope.row,'productParameter')"
+								>产品参数</el-dropdown-item>
+								<el-dropdown-item
+									:command="beforeHandleCommand(scope.$index, scope.row,'solveProgram')"
+								>解决方案</el-dropdown-item>
+							</el-dropdown-menu>
+						</el-dropdown>
 					</el-button-group>
 				</template>
 			</el-table-column>
@@ -40,12 +54,7 @@
 			top="50px"
 		>
 			<div style="margin: -10px 0 -10px;">
-				<certificate-dialog
-					v-if="dialog.visible"
-					:visible.sync="dialog.visible"
-					:dialogRow="dialog.dialogRow"
-					@refresh="getDataList"
-				/>
+				<component :is="currentView"></component>
 			</div>
 		</el-dialog>
 	</el-card>
@@ -54,7 +63,9 @@
 <script>
 import { productFindAll, productDeleteById } from "@/service";
 import alert from "@/utils/alert";
-// import certificateDialog from "./certificate-dialog";
+import productFeatures from "./product-features";
+import productParameter from "./product-parameter";
+import solveProgram from "./solve-program";
 
 export default {
 	name: "product",
@@ -68,10 +79,13 @@ export default {
 				dialogRow: {},
 			},
 			srcList: [],
+			currentView: "",
 		};
 	},
 	components: {
-		// certificateDialog,
+		productFeatures,
+		productParameter,
+		solveProgram,
 	},
 	mounted() {
 		this.getDataList();
@@ -82,7 +96,8 @@ export default {
 				this.tableData = res || [];
 			});
 		},
-		saveOrEdit(title) {
+		saveOrEdit(row, title) {
+			this.dialog.dialogRow = { ...row };
 			this.dialog.title = title;
 			this.dialog.visible = true;
 		},
@@ -99,9 +114,16 @@ export default {
 				this.srcList.push(i.imgUrl);
 			});
 		},
-		updateProduct(row) {
-			this.dialog.dialogRow = { ...row };
-			this.dialog.visible = true;
+		beforeHandleCommand(index, row, command) {
+			return {
+				index: index,
+				row: row,
+				command: command,
+			};
+		},
+		handleCommand(command) {
+			this.currentView = command.command;
+			this.saveOrEdit(command.row,'编辑');
 		},
 	},
 };

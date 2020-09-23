@@ -11,7 +11,8 @@ export const login = params => {
         method: "post",
         url: "admin/checkAdmin",
         params,
-        isForm: true
+        isForm: true,
+        isShowMsg: true
     })
 };
 
@@ -142,7 +143,8 @@ export const updateTrait = params => {
     return axios({
         method: "post",
         url: "proTrait/updateTrait",
-        params
+        params,
+        isShowMsg: true
     });
 };
 
@@ -155,7 +157,8 @@ export const proTraitDeleteById = params => {
     return axios({
         method: "get",
         url: "proTrait/deleteById",
-        params
+        params,
+        isShowMsg: true
     });
 };
 
@@ -179,7 +182,8 @@ export const productAddProduct = params => {
     return axios({
         method: "post",
         url: "product/addProduct",
-        params
+        params,
+        isShowMsg: true
     });
 };
 
@@ -207,7 +211,8 @@ export const productUpdatePro = params => {
     return axios({
         method: "post",
         url: "product/updatePro",
-        params
+        params,
+        isShowMsg: true
     });
 };
 
@@ -221,7 +226,8 @@ export const productDeleteById = params => {
     return axios({
         method: "get",
         url: "product/deleteById",
-        params
+        params,
+        isShowMsg: true
     });
 };
 
@@ -236,11 +242,13 @@ export const productDeleteById = params => {
  * 添加资质证书
  * @param {*} params 
  */
-export const addCert = params => {
+export const comCertAddCert = params => {
     return axios({
         method: "post",
         url: "comCert/addCert",
-        params
+        params,
+        isForm: true,
+        isShowMsg: true
     });
 };
 
@@ -276,10 +284,13 @@ export const findByCertName = params => {
  * 修改证书
  * @param {*} params 
  */
-export const updateCert = params => {
+export const comCertUpdateCert = params => {
     return axios({
         method: "post",
-        url: "comCert/updateCert"
+        url: "comCert/updateCert",
+        params,
+        isForm: true,
+        isShowMsg: true
     });
 };
 
@@ -292,7 +303,8 @@ export const updateCert = params => {
 export const comCertDeleteById = params => {
     return axios({
         method: "post",
-        url: "comCert/deleteById"
+        url: "comCert/deleteById",
+        isShowMsg: true
     });
 };
 
@@ -318,7 +330,9 @@ export const addCompany = params => {
     return axios({
         method: "post",
         url: "company/addCompany",
-        params
+        params,
+        isForm: true,
+        isShowMsg: true
     });
 };
 
@@ -346,6 +360,7 @@ export const updateCompany = params => {
         method: "post",
         url: "company/updateCompany",
         params,
+        isForm: true,
         isShowMsg: true
     });
 };

@@ -1,32 +1,18 @@
 <template>
-	<el-card>
-		<el-button type="primary" slot="header" @click="saveOrEdit('新增产品特点')">新增</el-button>
-		<el-table
-			:data="tableData"
-			style="width: 100%"
-			:loading="tableLoading"
-			:height="$utils.getTableHeight(1)"
-		>
-			<el-table-column width="50" label="序号" type="index" align="center"></el-table-column>
-			<el-table-column prop="imageUrl" label="图片路径" align="center"></el-table-column>
-			<el-table-column label="操作" align="center" width="140">
-				<template slot-scope="scope">
-					<el-button type="danger" @click="deleteSlide(scope.row.id)">删除</el-button>
-				</template>
-			</el-table-column>
-		</el-table>
-
-		<el-dialog
-			:visible.sync="dialog.visible"
-			:title="dialog.title"
-			:close-on-click-modal="false"
-			top="50px"
-		>
-			<div style="margin: -10px 0 -10px;">
-				<save-or-edit :visible.sync="dialog.visible" @refresh="getSilde" v-if="dialog.visible" />
-			</div>
-		</el-dialog>
-	</el-card>
+	<div>
+		<el-form ref="form" :model="ruleForm" :rules="rules" label-width="100px">
+			<el-form-item label="产品名称" prop="trProName">
+				<el-input v-model="ruleForm.trProName"></el-input>
+			</el-form-item>
+			<el-form-item label="产品特点" prop="trContent">
+				<el-input v-model="ruleForm.trContent"></el-input>
+			</el-form-item>
+		</el-form>
+		<div class="z-flex z-row-right">
+			<el-button plain @click="cancel">取消</el-button>
+			<el-button type="primary" @click="submitForm" :loading="submitLoading">提交</el-button>
+		</div>
+	</div>
 </template>
 
 <script>
@@ -38,20 +24,25 @@ export default {
 
 	data() {
 		return {
-			tableLoading: false,
-			tableData: [],
-			dialog: {
-				title: "",
-				visible: false,
+			ruleForm: {
+				id: 0,
+				trProName: "",
+				trContent: "",
 			},
+			rules: {
+				trProName: [{ required: true, message: "产品名称不能为空" }],
+				trContent: [{ required: true, message: "产品特点不能为空" }],
+			},
+			submitLoading: false,
 		};
 	},
-    mounted() {
-        // this.getDataList();
-    },
+	mounted() {},
 	methods: {
-
-    },
+		cancel() {
+			this.$emit("update:visible", false);
+		},
+		submitForm() {},
+	},
 };
 </script>
 

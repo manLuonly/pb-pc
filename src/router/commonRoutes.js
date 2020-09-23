@@ -44,44 +44,15 @@ export default [{
             title: "产品"
         },
         children: [{
-                path: "product-child",
-                name: "product-child",
-                component: () =>
-                    import ("@/page/product/product"),
-                meta: {
+            path: "product-child",
+            name: "product-child",
+            component: () =>
+                import ("@/page/product/product"),
+            meta: {
 
-                    title: "产品"
-                }
-            },
-            {
-                path: "product-features",
-                name: "product-features",
-                component: () =>
-                    import ("@/page/product/product-features"),
-                meta: {
-                    title: "产品特点"
-                }
-            },
-            {
-                path: "product-parameter",
-                name: "product-parameter",
-                component: () =>
-                    import ("@/page/product/product-parameter"),
-                meta: {
-                    title: "产品参数"
-                }
-            },
-            {
-                path: "solve-program",
-                name: "solve-program",
-                component: () =>
-                    import ("@/page/product/solve-program"),
-                meta: {
-
-                    title: "解决方案"
-                }
-            },
-        ]
+                title: "产品"
+            }
+        }]
     },
     {
         path: "/certificate",
