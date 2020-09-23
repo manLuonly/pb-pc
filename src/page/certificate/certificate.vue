@@ -4,7 +4,7 @@
 		<el-table
 			:data="tableData"
 			style="width: 100%"
-			:loading="tableLoading"
+			v-loading="tableLoading"
 			:height="$utils.getTableHeight(1)"
 		>
 			<el-table-column width="50" label="序号" type="index" align="center"></el-table-column>
