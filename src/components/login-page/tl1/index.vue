@@ -5,12 +5,6 @@
 <script>
 export default {
 	name: "loginTl1",
-	methods: {
-		//生成范文数
-		randomS(n, m) {
-			return Math.floor(Math.random() * (m - n) + n);
-		},
-	},
 };
 </script>
 

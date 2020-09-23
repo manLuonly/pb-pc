@@ -22,12 +22,7 @@ export const addSlideShow = params => {
         method: "post",
         params,
         url: "slideshow/addSlideShow",
-        axiosOptions: {
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            }
-        },
-        isShowMsg: true
+        isForm: true
     });
 };
 export const findAllSlideShow = params => {
@@ -50,19 +45,21 @@ export const slideShowDeleteById = params => {
 
 /**
  * 添加案例
- * @param {*} params 
+ * @param {*} params
  */
 export const comCaseAddCase = params => {
     return axios({
         method: "post",
         url: "comCase/addCase",
-        params
+        params,
+        isForm: true,
+        isShowMsg: true
     });
 };
 
 /**
  * 查询所有案例
- * @param {*} params 
+ * @param {*} params
  */
 export const findAllComCase = params => {
     return axios({
@@ -73,7 +70,7 @@ export const findAllComCase = params => {
 
 /**
  * 根据案例的id删除案例
- * @param {*} params 
+ * @param {*} params
  */
 export const comCaseDeleteById = params => {
     return axios({
@@ -86,13 +83,14 @@ export const comCaseDeleteById = params => {
 
 /**
  * 修改案例
- * @param {*} params 
+ * @param {*} params
  */
 export const comCaseUpdateCase = params => {
     return axios({
         method: "post",
         params,
         url: "comCase/updateCase",
+        isForm: true,
         isShowMsg: true
     });
 };

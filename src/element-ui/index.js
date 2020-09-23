@@ -34,7 +34,9 @@ import {
     MessageBox,
     Message,
     Notification,
-    Upload
+    Upload,
+    Carousel,
+    CarouselItem
 } from "element-ui";
 
 Vue.use(Pagination);
@@ -68,6 +70,11 @@ Vue.use(Link);
 Vue.use(Divider);
 Vue.use(Image);
 Vue.use(Upload);
+Vue.use(Carousel);
+Vue.use(CarouselItem);
+
+
+
 
 Vue.use(Loading.directive);
 Vue.prototype.$ELEMENT = { size: 'small'};

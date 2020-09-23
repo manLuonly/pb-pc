@@ -1,8 +1,5 @@
 <template>
 	<div class="login-tl">
-		<div class="logo-c">
-
-		</div>
 		<div class="login-bg-c">
 			<Logintl1 style="width: 100%;height: 100%;"></Logintl1>
 		</div>
@@ -20,10 +17,6 @@ export default {
 		loginContent,
 		Logintl1,
 	},
-	data() {
-		return {};
-	},
-
 	methods: {
 		resetForm() {
 			this.$refs.loginContent.resetForm();

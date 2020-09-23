@@ -28,7 +28,7 @@
 			</el-upload>
 		</div>
 
-		<el-dialog title="查看" :visible.sync="dialogVisible" append-to-body>
+		<el-dialog title="查看" :visible.sync="dialogVisible" append-to-body top="50px">
 			<div style="margin: -15px -20px">
 				<el-carousel v-if="dialogVisible" height="550px" :initial-index="initIndex">
 					<el-carousel-item v-for="(item,index) in dataList" :key="index">

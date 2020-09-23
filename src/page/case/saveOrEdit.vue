@@ -1,17 +1,17 @@
 <template>
 	<div class="save-or-edit">
-		<el-form ref="form" :model="ruleForm" :rules="rules" label-width="100px">
-			<el-form-item label="案例名称">
+		<el-form ref="form" :model="ruleForm" :rules="rules" label-width="110px">
+			<el-form-item label="案例名称" prop="caseName">
 				<el-input v-model="ruleForm.caseName"></el-input>
 			</el-form-item>
-			<el-form-item label="案例文字内容">
+			<el-form-item label="案例文字内容" prop="caseContent">
 				<el-input v-model="ruleForm.caseContent"></el-input>
 			</el-form-item>
-			<el-form-item label="案例地区">
+			<el-form-item label="案例地区" prop="caseRegion">
 				<el-input v-model="ruleForm.caseRegion"></el-input>
 			</el-form-item>
-			<el-form-item label="轮播图">
-				<uploadImageList @input="getImgList" :limit="4" :value=" ruleForm.imgUrl ? ruleForm.imgUrl.map(i => i.imgUrl) : '' "  />
+			<el-form-item label="案例图" prop="imgUrl">
+				<uploadImageList @input="getImgList" :limit="4" :value="ruleForm.imgUrl" />
 			</el-form-item>
 		</el-form>
 		<div class="z-flex z-row-right">
@@ -33,9 +33,25 @@ export default {
 				caseName: "",
 				caseContent: "",
 				caseRegion: "",
-				imgUrl:[],
+				imgUrl: [],
 			},
-			rules: {},
+			rules: {
+				caseName: [{ required: true, message: "不能为空" }],
+				caseContent: [{ required: true, message: "不能为空" }],
+				caseRegion: [{ required: true, message: "不能为空" }],
+				imgUrl: [
+					{
+						trigger: "blur",
+						validator: (rule, value, callback) => {
+							if (!value.length || !value) {
+								callback(new Error("请上传图片后提交！"));
+							} else {
+								callback();
+							}
+						},
+					},
+				],
+			},
 			submitLoading: false,
 			filesMap: {},
 		};
@@ -45,43 +61,67 @@ export default {
 		default: () => {},
 	},
 	mounted() {
-		if (!this.dialogRow.id) {
-			this.$nextTick(() => {
-				this.$refs["form"].resetFields();
+		if (this.dialogRow.id) {
+			const {
+				caseName,
+				id,
+				caseContent,
+				caseRegion,
+				caseImgList,
+			} = this.dialogRow;
+			const _caseImgList = caseImgList.map((item) => item.imgUrl);
+			Object.assign(this.ruleForm, {
+				id,
+				caseName,
+				caseContent,
+				caseRegion,
+				imgUrl:
+					Array.isArray(_caseImgList) && _caseImgList.length
+						? _caseImgList.join(",")
+						: "",
 			});
-		} else {
-			this.ruleForm = this.dialogRow;
-			this.ruleForm.imgUrl = this.dialogRow.caseImgList;
 		}
 	},
 	methods: {
 		cancel() {
 			this.$emit("update:visible", false);
 		},
-		getImgList(filse) {
-			this.ruleForm.imgUrl = filse;
+		getImgList(files) {
+			this.ruleForm.imgUrl = files;
 		},
 		submitForm() {
-			this.submitLoading = true;
-			if (!this.dialogRow.id) {
-				comCaseAddCase(this.ruleForm)
-					.then(() => {
-						this.$emit("refresh");
-						this.cancel();
-					})
-					.finally(() => {
-						this.submitLoading = false;
-					});
-			} else {
-				comCaseUpdateCase(this.ruleForm)
-					.then((res) => {
-						this.$emit("refresh");
-						this.cancel();
-					})
-					.finally(() => {
-						this.submitLoading = false;
-					});
-			}
+			this.$refs.form.validate((valid) => {
+				if (valid) {
+					const { ruleForm } = this;
+					const params = {
+						...ruleForm,
+						imgUrl: Array.isArray(ruleForm.imgUrl)
+							? ruleForm.imgUrl.join(",")
+							: ruleForm.imgUrl,
+					};
+
+					this.submitLoading = true;
+					if (!this.dialogRow.id) {
+						comCaseAddCase(params)
+							.then(() => {
+								this.$emit("refresh");
+								this.cancel();
+							})
+							.finally(() => {
+								this.submitLoading = false;
+							});
+					} else {
+						comCaseUpdateCase(params)
+							.then((res) => {
+								this.$emit("refresh");
+								this.cancel();
+							})
+							.finally(() => {
+								this.submitLoading = false;
+							});
+					}
+				}
+			});
 		},
 	},
 };

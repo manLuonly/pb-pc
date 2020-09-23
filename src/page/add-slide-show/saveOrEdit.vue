@@ -1,8 +1,8 @@
 <template>
 	<div class="save-or-edit">
-		<el-form ref="form" :rules="rules" label-width="60px">
-			<el-form-item label="轮播图">
-				<uploadImageList @input="getImgList" :limit="4" value />
+		<el-form ref="form" :rules="rules" :model="ruleForm" label-width="60px">
+			<el-form-item label="轮播图" prop="imgUrl">
+				<uploadImageList @input="getImgList" :limit="4" />
 			</el-form-item>
 		</el-form>
 		<div class="z-flex z-row-right">
@@ -22,7 +22,20 @@ export default {
 			ruleForm: {
 				imgUrl: [],
 			},
-			rules: {},
+			rules: {
+				imgUrl: [
+					{
+						trigger: "blur",
+						validator: (rule, value, callback) => {
+							if (!value.length || !value) {
+								callback(new Error("请上传图片后提交！"));
+							} else {
+								callback();
+							}
+						},
+					},
+				],
+			},
 			submitLoading: false,
 		};
 	},
@@ -30,19 +43,23 @@ export default {
 		cancel() {
 			this.$emit("update:visible", false);
 		},
-		getImgList(filse) {
-			this.ruleForm.imgUrl = filse.split(",");
+		getImgList(files) {
+			this.ruleForm.imgUrl = files;
 		},
 		submitForm() {
-			this.submitLoading = true;
-			addSlideShow(this.ruleForm)
-				.then(() => {
-					this.$emit("refresh");
-					this.cancel();
-				})
-				.finally(() => {
-					this.submitLoading = false;
-				});
+			this.$refs.form.validate((valid) => {
+				if (valid) {
+					this.submitLoading = true;
+					addSlideShow(this.ruleForm)
+						.then(() => {
+							this.$emit("refresh");
+							this.cancel();
+						})
+						.finally(() => {
+							this.submitLoading = false;
+						});
+				}
+			});
 		},
 	},
 };

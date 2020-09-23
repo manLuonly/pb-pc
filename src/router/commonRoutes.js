@@ -20,7 +20,6 @@ export default [{
             component: () =>
                 import ("@/page/add-slide-show"),
             meta: {
-                icon: "el-icon-s-home",
                 title: "首页轮播图"
             }
         }]
@@ -34,7 +33,6 @@ export default [{
             component: () =>
                 import ("@/page/case/case"),
             meta: {
-                icon: "el-icon-s-home",
                 title: "案例"
             }
         }]
@@ -43,7 +41,6 @@ export default [{
         path: "/product",
         component: Layout,
         meta: {
-            icon: "el-icon-s-home",
             title: "产品"
         },
         children: [{
@@ -95,7 +92,6 @@ export default [{
             component: () =>
                 import ("@/page/certificate/certificate"),
             meta: {
-                icon: "el-icon-s-home",
                 title: "资质证书"
             }
         }]
@@ -109,7 +105,6 @@ export default [{
             component: () =>
                 import ("@/page/about-company/about-company"),
             meta: {
-                icon: "el-icon-s-home",
                 title: "关于公司"
             }
         }]
