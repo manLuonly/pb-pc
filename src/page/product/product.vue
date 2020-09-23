@@ -25,7 +25,7 @@
 			<el-table-column label="操作" align="center" width="200">
 				<template slot-scope="scope">
 					<el-button-group>
-						<el-button type="primary" @click="updateProduct(scope.row)">修改</el-button>
+						<el-button type="primary" @click="updateProduct(scope.row)">编辑</el-button>
 						<el-button type="danger" @click="deleteProduct(scope.row.id)">删除</el-button>
 						<el-button type="info">操作</el-button>
 					</el-button-group>
