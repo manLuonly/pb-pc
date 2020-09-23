@@ -18,7 +18,10 @@ export default (cb, cbParams) => {
 
                 cb(cbParams).then(() => {
                     done();
-                }).finally(() => {
+                }).catch(() => {
+                    instance.confirmButtonText = "删除";
+                })
+                .finally(() => {
                     instance.confirmButtonLoading = false;
                 })
             } else {

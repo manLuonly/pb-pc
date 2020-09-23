@@ -298,12 +298,13 @@ export const comCertUpdateCert = params => {
 
 /**
  * 根据id删除资质证书
- * @param {*} params 
+ * @param {*} params
  */
 export const comCertDeleteById = params => {
     return axios({
-        method: "post",
+        method: "get",
         url: "comCert/deleteById",
+        params,
         isShowMsg: true
     });
 };

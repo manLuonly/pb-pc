@@ -7,6 +7,7 @@
 			:loading="tableLoading"
 			:height="$utils.getTableHeight(1)"
 		>
+			<el-table-column width="50" label="序号" type="index" align="center"></el-table-column>
 			<el-table-column prop="certName" label="资质证书名称" align="center"></el-table-column>
 			<el-table-column prop="imageUrl" label="图片路径" align="center">
 				<template slot-scope="scope">
