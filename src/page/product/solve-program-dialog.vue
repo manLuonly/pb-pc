@@ -1,16 +1,16 @@
 <template>
-	<div class="save-or-edit">
-		<el-form ref="form" :model="ruleForm" :rules="rules" label-width="110px">
-			<el-form-item label="案例名称" prop="caseName">
-				<el-input v-model="ruleForm.caseName"></el-input>
+	<div>
+		<el-form ref="form" :model="ruleForm" :rules="rules" label-width="120px">
+			<el-form-item label="产品名称" prop="trContent">
+				<el-input v-model="ruleForm.thProName" :disabled="dialogRow.id ? true : false "></el-input>
 			</el-form-item>
-			<el-form-item label="案例文字内容" prop="caseContent">
-				<el-input v-model="ruleForm.caseContent"></el-input>
+			<el-form-item label="原理分类" prop="trProName">
+				<el-input v-model="ruleForm.thCategory"></el-input>
 			</el-form-item>
-			<el-form-item label="案例地区" prop="caseRegion">
-				<el-input v-model="ruleForm.caseRegion"></el-input>
+			<el-form-item label="原理说明内容" prop="trContent">
+				<el-input v-model="ruleForm.thContent"></el-input>
 			</el-form-item>
-			<el-form-item label="案例图" prop="imgUrl">
+			<el-form-item label="图片" prop="imgUrl">
 				<uploadImageList @input="getImgList" :limit="4" :value="ruleForm.imgUrl" />
 			</el-form-item>
 		</el-form>
@@ -22,26 +22,31 @@
 </template>
 
 <script>
-import { comCaseAddCase, comCaseUpdateCase } from "@/service";
-
+import {
+	proTheoryFindByProName,
+	proTheoryAddTheory,
+	proTheoryUpdateProTheory,
+} from "@/service";
 export default {
-	name: "saveOrEdit",
+	name: "solve-program",
+
 	data() {
 		return {
 			ruleForm: {
-				id: 0,
-				caseName: "",
-				caseContent: "",
-				caseRegion: "",
+				imgThId: 0,
+				thCategory: "",
+				thContent: "",
+				ThProName: "",
 				imgUrl: [],
 			},
+			submitLoading: false,
 			rules: {
-				caseName: [{ required: true, message: "案例名称不能为空" }],
-				caseContent: [{ required: true, message: "案例文字内容不能为空" }],
-				caseRegion: [{ required: true, message: "案例地区不能为空" }],
+				caseName: [{ required: true, message: "不能为空" }],
+				caseContent: [{ required: true, message: "不能为空" }],
+				caseRegion: [{ required: true, message: "不能为空" }],
 				imgUrl: [
 					{
-						trigger: "blur",
+						trigger: ["blur", "change"],
 						validator: (rule, value, callback) => {
 							if (!value.length || !value) {
 								callback(new Error("请上传图片后提交！"));
@@ -52,8 +57,6 @@ export default {
 					},
 				],
 			},
-			submitLoading: false,
-			filesMap: {},
 		};
 	},
 	props: {
@@ -63,21 +66,21 @@ export default {
 	mounted() {
 		if (this.dialogRow.id) {
 			const {
-				caseName,
 				id,
-				caseContent,
-				caseRegion,
-				caseImgList,
+				thCategory,
+				thContent,
+				thProName,
+				theoryImgList,
 			} = this.dialogRow;
-			const _caseImgList = caseImgList.map((item) => item.imgUrl);
+			const _theoryImgList = theoryImgList.map((item) => item.imgUrl);
 			Object.assign(this.ruleForm, {
 				id,
-				caseName,
-				caseContent,
-				caseRegion,
+				thCategory,
+				thContent,
+				thProName,
 				imgUrl:
-					Array.isArray(_caseImgList) && _caseImgList.length
-						? _caseImgList.join(",")
+					Array.isArray(_theoryImgList) && _theoryImgList.length
+						? _theoryImgList.join(",")
 						: "",
 			});
 		}
@@ -86,8 +89,8 @@ export default {
 		cancel() {
 			this.$emit("update:visible", false);
 		},
-		getImgList(files) {
-			this.ruleForm.imgUrl = files;
+		getImgList(filse) {
+			this.ruleForm.imgUrl = filse;
 		},
 		submitForm() {
 			this.$refs.form.validate((valid) => {
@@ -102,16 +105,15 @@ export default {
 
 					this.submitLoading = true;
 					if (!this.dialogRow.id) {
-						comCaseAddCase(params)
+						proTheoryAddTheory(params)
 							.then(() => {
-								this.$emit("refresh");
 								this.cancel();
 							})
 							.finally(() => {
 								this.submitLoading = false;
 							});
 					} else {
-						comCaseUpdateCase(params)
+						proTheoryUpdateProTheory(params)
 							.then((res) => {
 								this.$emit("refresh");
 								this.cancel();
@@ -126,3 +128,6 @@ export default {
 	},
 };
 </script>
+
+<style lang='scss' scoped>
+</style>

@@ -49,7 +49,6 @@ export default [{
             component: () =>
                 import ("@/page/product/product"),
             meta: {
-
                 title: "产品"
             }
         }]

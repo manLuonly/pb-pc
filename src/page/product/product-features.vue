@@ -1,47 +1,81 @@
 <template>
 	<div>
-		<el-form ref="form" :model="ruleForm" :rules="rules" label-width="100px">
-			<el-form-item label="产品名称" prop="trProName">
-				<el-input v-model="ruleForm.trProName"></el-input>
-			</el-form-item>
-			<el-form-item label="产品特点" prop="trContent">
-				<el-input v-model="ruleForm.trContent"></el-input>
-			</el-form-item>
-		</el-form>
-		<div class="z-flex z-row-right">
-			<el-button plain @click="cancel">取消</el-button>
-			<el-button type="primary" @click="submitForm" :loading="submitLoading">提交</el-button>
-		</div>
+		<el-table :data="tableData" style="width: 100%" :height="$utils.getTableHeight(1)">
+			<el-table-column width="50" label="序号" type="index" align="center"></el-table-column>
+			<el-table-column prop="trProName" label="产品名称" align="center" show-overflow-tooltip></el-table-column>
+			<el-table-column prop="trContent" label="特点内容" align="center" show-overflow-tooltip></el-table-column>
+			<el-table-column label="操作" align="center" width="140">
+				<template slot-scope="scope">
+					<el-button-group>
+						<el-button type="primary" @click="saveOrEdit(scope.row)">编辑</el-button>
+						<el-button type="danger" @click="deleteFeatures(scope.row.id)">删除</el-button>
+					</el-button-group>
+				</template>
+			</el-table-column>
+		</el-table>
+
+		<el-dialog
+			:visible.sync="dialog.visible"
+			:title="dialog.title"
+			:close-on-click-modal="false"
+			append-to-body
+			top="50px"
+		>
+			<div style="margin: -10px 0 -10px;">
+				<product-features-dialog
+					v-if="dialog.visible"
+					:visible.sync="dialog.visible"
+					:dialogRow="dialog.dialogRow"
+					@refresh="getDataList"
+				/>
+			</div>
+		</el-dialog>
 	</div>
 </template>
 
 <script>
-import { findByProName, params } from "@/service";
+import { proTraitFindByProName, proTraitDeleteById } from "@/service";
 import alert from "@/utils/alert";
+import productFeaturesDialog from "./product-features-dialog";
 
 export default {
 	name: "product-features",
-
 	data() {
 		return {
-			ruleForm: {
-				id: 0,
-				trProName: "",
-				trContent: "",
+			tableData: [],
+			dialog: {
+				title: "",
+				visible: false,
+				dialogRow: {},
 			},
-			rules: {
-				trProName: [{ required: true, message: "产品名称不能为空" }],
-				trContent: [{ required: true, message: "产品特点不能为空" }],
-			},
-			submitLoading: false,
 		};
 	},
-	mounted() {},
+	props: {
+		dialogRow: Object,
+		default: () => {},
+	},
+	components: {
+		productFeaturesDialog,
+	},
+	mounted() {
+		this.dialogRow.id ? this.getDataList() : this.saveOrEdit();
+	},
 	methods: {
-		cancel() {
-			this.$emit("update:visible", false);
+		getDataList() {
+			const form = { proName: this.dialogRow.proName };
+			proTraitFindByProName(form).then((res) => {
+				this.tableData = res;
+			});
 		},
-		submitForm() {},
+		deleteFeatures(id) {
+			alert(proTraitDeleteById, { id }).then(() => {
+				this.getDataList();
+			});
+		},
+		saveOrEdit(row) {
+			this.dialog.dialogRow = { ...row };
+			this.dialog.visible = true;
+		},
 	},
 };
 </script>

@@ -116,6 +116,7 @@ export const addTrait = params => {
         method: "post",
         url: "proTrait/addTrait",
         params,
+        isForm: true,
         isShowMsg: true
     });
 };
@@ -125,7 +126,7 @@ export const addTrait = params => {
  * 根据产品名称查询产品特点
  * @param {*} params 
  */
-export const findByProName = params => {
+export const proTraitFindByProName = params => {
     return axios({
         method: "get",
         url: "proTrait/findByProName",
@@ -144,6 +145,7 @@ export const updateTrait = params => {
         method: "post",
         url: "proTrait/updateTrait",
         params,
+        isForm: true,
         isShowMsg: true
     });
 };
@@ -170,6 +172,128 @@ export const proTraitDeleteById = params => {
 
 
 
+//解决方案(产品原理模块)
+/**
+ * 添加产品原理
+ * @param {*} params 
+ */
+export const proTheoryAddTheory = params => {
+    return axios({
+        method: "post",
+        url: "proTheory/addTheory",
+        params,
+        isForm: true,
+        isShowMsg: true
+    });
+};
+
+
+
+/**
+ * 根据产品名称查询产品原理
+ * @param {*} params 
+ */
+export const proTheoryFindByProName = params => {
+    return axios({
+        method: "get",
+        url: "proTheory/findByProName",
+        params
+    });
+};
+
+
+/**
+ * 修改产品原理
+ * @param {*} params 
+ */
+export const proTheoryUpdateProTheory = params => {
+    return axios({
+        method: "post",
+        url: "proTheory/updateProTheory",
+        params,
+        isForm: true,
+        isShowMsg: true
+    });
+};
+
+/**
+ * 根据id删除产品原理
+ * @param {*} params 
+ */
+export const proTheoryDeleteById = params => {
+    return axios({
+        method: "get",
+        url: "proTheory/deleteById",
+        params
+    });
+};
+
+
+
+
+
+
+
+//产品参数模块
+/**
+ * 添加产品参数
+ * @param {*} params 
+ */
+export const proParamAddParam = params => {
+    return axios({
+        method: "post",
+        url: "proParam/addParam",
+        params,
+        isForm: true,
+        isShowMsg: true
+    });
+};
+
+
+
+/**
+ * 根据产品名称查询
+ * @param {*} params 
+ */
+export const proParamFindByProName = params => {
+    return axios({
+        method: "get",
+        url: "proParam/findByProName",
+        params
+    });
+};
+
+
+
+/**
+ * 根据id修改产品参数
+ * @param {*} params 
+ */
+export const proParamUpdateById = params => {
+    return axios({
+        method: "post",
+        url: "proParam/updateById",
+        params,
+        isForm: true,
+        isShowMsg: true
+    });
+};
+
+
+/**
+ * 根据id删除产品参数
+ * @param {*} params 
+ */
+export const proParamDeleteById = params => {
+    return axios({
+        method: "get",
+        url: "proParam/deleteById",
+        params
+    });
+};
+
+
+
 
 
 // 产品和产品图模块
@@ -183,6 +307,7 @@ export const productAddProduct = params => {
         method: "post",
         url: "product/addProduct",
         params,
+        isForm: true,
         isShowMsg: true
     });
 };
@@ -212,6 +337,7 @@ export const productUpdatePro = params => {
         method: "post",
         url: "product/updatePro",
         params,
+        isForm: true,
         isShowMsg: true
     });
 };

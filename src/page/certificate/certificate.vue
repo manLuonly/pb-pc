@@ -11,14 +11,11 @@
 			<el-table-column prop="certName" label="资质证书名称" align="center"></el-table-column>
 			<el-table-column prop="imageUrl" label="图片路径" align="center">
 				<template slot-scope="scope">
-					<el-image
-						v-if="scope.row.certImgList"
-						style="width: 100px; height: 50px;cursor: pointer;"
-						:src="scope.row.certImgList[0].imgUrl || '' "
-						fit="contain"
-						:preview-src-list="srcList"
-						@click="getImgUrl(scope.row.certImgList)"
-					></el-image>
+					<loadingImage
+						:src="scope.row.certImgList[0] ? scope.row.certImgList[0].imgUrl : ''"
+						style="width:100px; height:50px;cursor: pointer;"
+						:srcList="getImgUrl(scope.row)"
+					/>
 				</template>
 			</el-table-column>
 			<el-table-column label="操作" align="center" width="140">
@@ -80,7 +77,7 @@ export default {
 				this.tableData = res || [];
 			});
 		},
-		saveOrEdit(row,title) {
+		saveOrEdit(row, title) {
 			this.dialog.dialogRow = { ...row };
 			this.dialog.title = title;
 			this.dialog.visible = true;
@@ -92,12 +89,9 @@ export default {
 			});
 		},
 		// 展示图片
-		getImgUrl(arr) {
-			this.srcList = [];
-			arr.filter((i) => {
-				this.srcList.push(i.imgUrl);
-			});
-		}
+		getImgUrl({ certImgList }) {
+			return certImgList.map((item) => item.imgUrl);
+		},
 	},
 };
 </script>

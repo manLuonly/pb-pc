@@ -12,14 +12,11 @@
 			<el-table-column prop="comContent" label="公司简介" align="center"></el-table-column>
 			<el-table-column prop="imageUrl" label="图片路径" align="center">
 				<template slot-scope="scope">
-					<el-image
-						v-if="scope.row.imgList"
-						style="width: 100px; height: 50px"
-						:src="scope.row.imgList[0].imgUrl || '' "
-						fit="contain"
-						:preview-src-list="srcList"
-						@click="getImgUrl(scope.row.imgList[0].imgUrl)"
-					></el-image>
+					<loadingImage
+						:src="scope.row.imgList[0] ? scope.row.imgList[0].imgUrl : ''"
+						style="width:100px; height:50px;cursor: pointer;"
+						:srcList="getImgUrl(scope.row)"
+					/>
 				</template>
 			</el-table-column>
 			<el-table-column label="操作" align="center" width="140">
@@ -81,7 +78,7 @@ export default {
 				this.tableData = res || [];
 			});
 		},
-		saveOrEdit(row,title) {
+		saveOrEdit(row, title) {
 			this.dialog.dialogRow = { ...row };
 			this.dialog.title = title;
 			this.dialog.visible = true;
@@ -91,10 +88,9 @@ export default {
 				this.getDataList();
 			});
 		},
-		getImgUrl(url) {
-			this.srcList = [];
-			this.srcList.push(url);
-		}
+		getImgUrl({ imgList }) {
+			return imgList.map((item) => item.imgUrl);
+		},
 	},
 };
 </script>

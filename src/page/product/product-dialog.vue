@@ -1,16 +1,16 @@
 <template>
-	<div class="save-or-edit">
-		<el-form ref="form" :model="ruleForm" :rules="rules" label-width="110px">
-			<el-form-item label="案例名称" prop="caseName">
-				<el-input v-model="ruleForm.caseName"></el-input>
+	<div>
+		<el-form ref="form" :model="ruleForm" :rules="rules" label-width="120px">
+			<el-form-item label="产品名称" prop="proName">
+				<el-input v-model="ruleForm.proName" ></el-input>
 			</el-form-item>
-			<el-form-item label="案例文字内容" prop="caseContent">
-				<el-input v-model="ruleForm.caseContent"></el-input>
+			<el-form-item label="产品的简介" prop="proIntro">
+				<el-input v-model="ruleForm.proIntro"></el-input>
 			</el-form-item>
-			<el-form-item label="案例地区" prop="caseRegion">
-				<el-input v-model="ruleForm.caseRegion"></el-input>
+			<el-form-item label="与普通材料对比" prop="proContrast">
+				<el-input v-model="ruleForm.proContrast"></el-input>
 			</el-form-item>
-			<el-form-item label="案例图" prop="imgUrl">
+			<el-form-item label="图片" prop="imgUrl">
 				<uploadImageList @input="getImgList" :limit="4" :value="ruleForm.imgUrl" />
 			</el-form-item>
 		</el-form>
@@ -22,26 +22,30 @@
 </template>
 
 <script>
-import { comCaseAddCase, comCaseUpdateCase } from "@/service";
-
+import {
+	productAddProduct,
+	productUpdatePro
+} from "@/service";
 export default {
-	name: "saveOrEdit",
+	name: "product-dialog",
+
 	data() {
 		return {
 			ruleForm: {
-				id: 0,
-				caseName: "",
-				caseContent: "",
-				caseRegion: "",
+				imgThId: 0,
+				proName: "",
+				proIntro: "",
+				proContrast: "",
 				imgUrl: [],
 			},
+			submitLoading: false,
 			rules: {
-				caseName: [{ required: true, message: "案例名称不能为空" }],
-				caseContent: [{ required: true, message: "案例文字内容不能为空" }],
-				caseRegion: [{ required: true, message: "案例地区不能为空" }],
+				proName: [{ required: true, message: "产品名称不能为空" }],
+				proIntro: [{ required: true, message: "产品的简介不能为空" }],
+				proContrast: [{ required: true, message: "与普通材料的对比不能为空" }],
 				imgUrl: [
 					{
-						trigger: "blur",
+						trigger: ["blur", "change"],
 						validator: (rule, value, callback) => {
 							if (!value.length || !value) {
 								callback(new Error("请上传图片后提交！"));
@@ -52,8 +56,6 @@ export default {
 					},
 				],
 			},
-			submitLoading: false,
-			filesMap: {},
 		};
 	},
 	props: {
@@ -63,21 +65,21 @@ export default {
 	mounted() {
 		if (this.dialogRow.id) {
 			const {
-				caseName,
 				id,
-				caseContent,
-				caseRegion,
-				caseImgList,
+				proName,
+				proIntro,
+				proContrast,
+				proImgList,
 			} = this.dialogRow;
-			const _caseImgList = caseImgList.map((item) => item.imgUrl);
+			const _proImgList = proImgList.map((item) => item.imgUrl);
 			Object.assign(this.ruleForm, {
 				id,
-				caseName,
-				caseContent,
-				caseRegion,
+				proName,
+				proIntro,
+				proContrast,
 				imgUrl:
-					Array.isArray(_caseImgList) && _caseImgList.length
-						? _caseImgList.join(",")
+					Array.isArray(_proImgList) && _proImgList.length
+						? _proImgList.join(",")
 						: "",
 			});
 		}
@@ -86,8 +88,8 @@ export default {
 		cancel() {
 			this.$emit("update:visible", false);
 		},
-		getImgList(files) {
-			this.ruleForm.imgUrl = files;
+		getImgList(filse) {
+			this.ruleForm.imgUrl = filse;
 		},
 		submitForm() {
 			this.$refs.form.validate((valid) => {
@@ -102,16 +104,16 @@ export default {
 
 					this.submitLoading = true;
 					if (!this.dialogRow.id) {
-						comCaseAddCase(params)
+						productAddProduct(params)
 							.then(() => {
-								this.$emit("refresh");
+                                this.$emit("refresh");
 								this.cancel();
 							})
 							.finally(() => {
 								this.submitLoading = false;
 							});
 					} else {
-						comCaseUpdateCase(params)
+						productUpdatePro(params)
 							.then((res) => {
 								this.$emit("refresh");
 								this.cancel();
@@ -126,3 +128,6 @@ export default {
 	},
 };
 </script>
+
+<style lang='scss' scoped>
+</style>
