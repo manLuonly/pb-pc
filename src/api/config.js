@@ -22,7 +22,10 @@ axios.interceptors.response.use(
 
         switch (response.data.code) {
             case "0":
-                //直接跳到catch中
+                response = Promise.reject(response);
+                errorMsg(msg);
+                break;
+            case "2":
                 response = Promise.reject(response);
                 errorMsg(msg);
                 break;
