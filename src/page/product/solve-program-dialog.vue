@@ -1,13 +1,13 @@
 <template>
 	<div>
 		<el-form ref="form" :model="ruleForm" :rules="rules" label-width="120px">
-			<el-form-item label="产品名称" prop="trContent">
+			<el-form-item label="产品名称" prop="thProName">
 				<el-input v-model="ruleForm.thProName" :disabled="dialogRow.id ? true : false "></el-input>
 			</el-form-item>
-			<el-form-item label="原理分类" prop="trProName">
+			<el-form-item label="原理分类" prop="thCategory">
 				<el-input v-model="ruleForm.thCategory"></el-input>
 			</el-form-item>
-			<el-form-item label="原理说明内容" prop="trContent">
+			<el-form-item label="原理说明内容" prop="thContent">
 				<el-input v-model="ruleForm.thContent"></el-input>
 			</el-form-item>
 			<el-form-item label="图片" prop="imgUrl">
@@ -41,9 +41,9 @@ export default {
 			},
 			submitLoading: false,
 			rules: {
-				trContent: [{ required: true, message: "产品名称不能为空" }],
-				trProName: [{ required: true, message: "原理分类不能为空" }],
-				trContent: [{ required: true, message: "原理说明内容不能为空" }],
+				thProName: [{ required: true, message: "产品名称不能为空" }],
+				thCategory: [{ required: true, message: "原理分类不能为空" }],
+				thContent: [{ required: true, message: "原理说明内容不能为空" }],
 				imgUrl: [
 					{
 						trigger: ["blur", "change"],
