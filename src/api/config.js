@@ -17,10 +17,20 @@ let axios = Axios.create({
 
 // 添加响应拦截器
 axios.interceptors.response.use(
-    (response) => {
+    response => {
+        const msg = response.data.message;
+
+        switch (response.data.code) {
+            case "0":
+                //直接跳到catch中
+                response = Promise.reject(response);
+                errorMsg(msg);
+                break;
+        }
+
         return response;
     },
-    (error) => {
+    error => {
         let msg = error.data ? error.data.message : "出现异常,请刷新重试";
 
         errorMsg(msg);

@@ -23,6 +23,7 @@ export const addSlideShow = params => {
         method: "post",
         params,
         url: "slideshow/addSlideShow",
+        isShowMsg: true,
         isForm: true
     });
 };
