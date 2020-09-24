@@ -27,6 +27,7 @@
 					:visible.sync="dialog.visible"
 					:dialogRow="dialog.dialogRow"
 					@refresh="getDataList"
+					@close="close"
 				/>
 			</div>
 		</el-dialog>
@@ -76,6 +77,10 @@ export default {
 			this.dialog.dialogRow = { ...row };
 			this.dialog.visible = true;
 		},
+		// 关闭父级的父级dialog
+		close() {
+			this.$emit('close',false);
+		}
 	},
 };
 </script>

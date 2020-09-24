@@ -108,6 +108,7 @@ export default {
 						proTheoryAddTheory(params)
 							.then(() => {
 								this.cancel();
+								this.$emit('close',false);
 							})
 							.finally(() => {
 								this.submitLoading = false;

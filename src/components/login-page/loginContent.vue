@@ -65,12 +65,11 @@ export default {
 	methods: {
 		submitForm() {
 			this.$refs.form.validate((valid) => {
-				require("js-md5")(this.form.password);
 
 				if (valid) {
 					this.$emit("submit", {
 						...this.form,
-						password: require("js-md5")(this.form.password),
+						password: this.form.password,
 					});
 				}
 			});

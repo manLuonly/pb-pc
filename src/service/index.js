@@ -289,7 +289,8 @@ export const proParamDeleteById = params => {
     return axios({
         method: "get",
         url: "proParam/deleteById",
-        params
+        params,
+        isShowMsg: true
     });
 };
 

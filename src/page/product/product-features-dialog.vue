@@ -55,7 +55,7 @@ export default {
 						addTrait(ruleForm)
 							.then(() => {
 								this.cancel();
-								// this.$parent.$parent.dialog.visible = false;
+								this.$emit('close',false);
 							})
 							.finally(() => {
 								this.submitLoading = false;

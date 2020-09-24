@@ -2,7 +2,7 @@
 	<div>
 		<el-form ref="form" :model="ruleForm" :rules="rules" label-width="120px">
 			<el-form-item label="产品名称" prop="proName">
-				<el-input v-model="ruleForm.proName" :disabled="dialogRow.proName ? true : false "></el-input>
+				<el-input v-model="ruleForm.proName" :disabled="dialogRow.id ? true : false "></el-input>
 			</el-form-item>
 			<el-form-item label="产品规格" prop="proSpec">
 				<el-input v-model="ruleForm.proSpec"></el-input>
@@ -64,7 +64,7 @@ export default {
 		default: () => {},
 	},
 	mounted() {
-		this.dialogRow.proName ? this.getDataList() : "";
+		this.dialogRow.id ? this.getDataList() : "";
 	},
 	methods: {
 		cancel() {
@@ -73,17 +73,24 @@ export default {
 		getDataList() {
 			const form = { name: this.dialogRow.proName };
 			proParamFindByProName(form).then((res) => {
-				this.ruleForm = res;
+				this.ruleForm = res || {};
 			});
 		},
 		deleteParameter() {
-			const { id } = this.dialogRow;
-			alert(proParamDeleteById, { id }).then(() => {
-				this.$emit("refresh");
-				this.cancel();
-			});
+			const { id } = this.ruleForm;
+			id
+				? alert(proParamDeleteById, { id }).then(() => {
+						this.$emit("refresh");
+						this.cancel();
+				  })
+				: this.$message.error("先请添加产品参数");
 		},
 		submitForm() {
+			if (!this.ruleForm.proName) {
+				this.$message.error("先请添加产品参数");
+				return;
+			}
+
 			this.$refs.form.validate((valid) => {
 				if (valid) {
 					const { ruleForm } = this;
