@@ -1,5 +1,6 @@
 <template>
 	<el-card>
+		<el-button style="margin-right:20px" type="primary" @click="productSaveOrEdit({},'新增')">新增产品</el-button>
 		<el-dropdown class="p-bottom-20" @command="handleCommand">
 			<el-button type="primary">
 				新增
@@ -11,7 +12,7 @@
 				<el-dropdown-item :command="beforeHandleCommand(2, {},'solveProgram','新增')">解决方案</el-dropdown-item>
 			</el-dropdown-menu>
 		</el-dropdown>
-		<el-button style="margin-left:20px" type="primary" @click="productSaveOrEdit({},'新增')">新增产品</el-button>
+	
 		<el-table
 			:data="tableData"
 			style="width: 100%"
