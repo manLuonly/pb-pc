@@ -41,9 +41,9 @@ export default {
 			},
 			submitLoading: false,
 			rules: {
-				caseName: [{ required: true, message: "不能为空" }],
-				caseContent: [{ required: true, message: "不能为空" }],
-				caseRegion: [{ required: true, message: "不能为空" }],
+				trContent: [{ required: true, message: "产品名称不能为空" }],
+				trProName: [{ required: true, message: "原理分类不能为空" }],
+				trContent: [{ required: true, message: "原理说明内容不能为空" }],
 				imgUrl: [
 					{
 						trigger: ["blur", "change"],
