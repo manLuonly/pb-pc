@@ -34,9 +34,9 @@ export default {
 		return {
 			ruleForm: {
 				imgThId: 0,
+				thProName: "",
 				thCategory: "",
 				thContent: "",
-				ThProName: "",
 				imgUrl: [],
 			},
 			submitLoading: false,
